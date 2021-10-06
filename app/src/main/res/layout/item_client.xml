@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
+    android:layout_width="match_parent" android:layout_height="75dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameText"
+        android:text="U Aung San"/>
+    <TextView
+        android:layout_toRightOf="@id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/typeText"
+        android:text="Dollar"/>
+    <TextView
+        android:layout_toRightOf="@id/typeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeText"
+        android:text="3:30"/>
+    <TextView
+        android:layout_toRightOf="@id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amtText"
+        android:text="105000" />
+
+</RelativeLayout>

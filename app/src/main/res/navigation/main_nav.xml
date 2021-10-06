@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/home_menu">
+
+
+    <fragment
+        android:id="@+id/home_menu"
+        android:name="com.mtu.ceit.hhk.traget.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/unpaid_menu"
+        android:name="com.mtu.ceit.hhk.traget.ui.ClientFragment"
+        android:label="fragment_unpaid"
+        tools:layout="@layout/fragment_clients" />
+    <fragment
+        android:id="@+id/paid_menu"
+        android:name="com.mtu.ceit.hhk.traget.ui.PaidFragment"
+        android:label="fragment_paid"
+        tools:layout="@layout/fragment_paid" />
+    <fragment
+        android:id="@+id/petrol_menu"
+        android:name="com.mtu.ceit.hhk.traget.ui.PetrolFragment"
+        android:label="fragment_petrol"
+        tools:layout="@layout/fragment_petrol" />
+</navigation>
