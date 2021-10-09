@@ -1,16 +1,13 @@
-package com.mtu.ceit.hhk.traget.ui
+package com.mtu.ceit.hhk.traget.ui.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.databinding.AddClientBinding
-import dagger.hilt.android.AndroidEntryPoint
-
-
+import com.mtu.ceit.hhk.traget.ui.viewmodel.ClientViewModel
 
 
 class AddClientFragment:BottomSheetDialogFragment() {
@@ -39,7 +36,9 @@ class AddClientFragment:BottomSheetDialogFragment() {
         var amt:Int = 0
         var mac:String = ""
         var name:String = ""
+        var bID:Int = 0
         binding.addBtn.setOnClickListener {
+
 
             name = binding.nameeditText.text.toString()
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -63,8 +62,8 @@ class AddClientFragment:BottomSheetDialogFragment() {
                     amt = time * 250
                 }
             }
-
-            clientViewModel.onSumbitClick(name,time,amt,mac)
+            bID = binding.barrelNoInput.text.toString().toInt()
+            clientViewModel.onSumbitClick(name,time,amt,mac,bID)
 
             this.dismiss()
         }

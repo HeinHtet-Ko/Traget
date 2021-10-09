@@ -1,8 +1,7 @@
 package com.mtu.ceit.hhk.traget.repos
 
-import com.mtu.ceit.hhk.traget.data.Client
-import com.mtu.ceit.hhk.traget.data.ClientDAO
-import com.mtu.ceit.hhk.traget.data.PaidSum
+import com.mtu.ceit.hhk.traget.data.model.Client
+import com.mtu.ceit.hhk.traget.data.localdb.ClientDAO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -15,7 +14,22 @@ import javax.inject.Inject
          dao.insertClient(client)
      }
 
-     suspend fun getPaidSum():PaidSum =
-         dao.getPaidSum()
+     suspend fun deleteClient(client: Client) {
+         dao.deleteClients(client)
+     }
 
+     suspend fun changePayStatus(status:UPDATE_PAY,id:Int) {
+
+         when(status) {
+             UPDATE_PAY.ToPaid -> dao.upDatetoPaid(id)
+             UPDATE_PAY.ToUnPaid -> dao.upDatetoUnPaid(id)
+         }
+
+     }
+
+
+ }
+
+enum class UPDATE_PAY{
+    ToPaid,ToUnPaid
 }

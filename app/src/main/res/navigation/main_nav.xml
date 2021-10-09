@@ -8,22 +8,22 @@
 
     <fragment
         android:id="@+id/home_menu"
-        android:name="com.mtu.ceit.hhk.traget.ui.MainFragment"
+        android:name="com.mtu.ceit.hhk.traget.ui.view.HomeFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/unpaid_menu"
-        android:name="com.mtu.ceit.hhk.traget.ui.ClientFragment"
+        android:name="com.mtu.ceit.hhk.traget.ui.view.ClientFragment"
         android:label="fragment_unpaid"
         tools:layout="@layout/fragment_clients" />
     <fragment
         android:id="@+id/paid_menu"
-        android:name="com.mtu.ceit.hhk.traget.ui.PaidFragment"
+        android:name="com.mtu.ceit.hhk.traget.ui.view.MaintenanceFragment"
         android:label="fragment_paid"
-        tools:layout="@layout/fragment_paid" />
+        tools:layout="@layout/fragment_maintenance" />
     <fragment
         android:id="@+id/petrol_menu"
-        android:name="com.mtu.ceit.hhk.traget.ui.PetrolFragment"
+        android:name="com.mtu.ceit.hhk.traget.ui.view.PetrolFragment"
         android:label="fragment_petrol"
         tools:layout="@layout/fragment_petrol" />
 </navigation>

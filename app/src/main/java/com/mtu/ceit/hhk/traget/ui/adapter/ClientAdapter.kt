@@ -1,27 +1,35 @@
-package com.mtu.ceit.hhk.traget.ui
+package com.mtu.ceit.hhk.traget.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mtu.ceit.hhk.traget.data.Client
+import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.databinding.ItemClientBinding
 
-class ClientAdapter: ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientDifferentiator()) {
+class ClientAdapter(private val lambda:(Client) -> Unit): ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientDifferentiator()) {
 
 
-    class ClientViewHolder(private val binding: ItemClientBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ClientViewHolder(private val binding: ItemClientBinding):RecyclerView.ViewHolder(binding.root){
 
-        fun bind(client:Client) {
+        init {
+
+           binding.root.setOnLongClickListener {
+               lambda(getItem(adapterPosition))
+               return@setOnLongClickListener true
+           }
+        }
+        fun bind(client: Client) {
 
             binding.apply {
                 nameText.text = client.name
                 val hour = client.timeTaken/60
                 val min = client.timeTaken%60
-               timeText.text = "$hour : $min "
+               timeText.text = " $hour:$min "
                 amtText.text= client.amount.toString()
                 typeText.text = client.macType
+                noText.text = (adapterPosition+1).toString()
 
                 amtText.paint.isStrikeThruText = client.isPaid
 

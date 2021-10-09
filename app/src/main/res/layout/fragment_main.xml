@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.MainFragment"
+    tools:context=".ui.view.HomeFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <TextView
-        android:id="@+id/paidSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Main"
-        android:layout_centerInParent="true"/>
-    <TextView
-        android:id="@+id/UnpaidSum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="UNpaid"
-        android:layout_below="@id/paidSum"
-        android:layout_centerInParent="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:id="@+id/barChart"
+            />
 
-</RelativeLayout>
+        <TextView
+            android:layout_below="@id/barChart"
+            android:id="@+id/paidSum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/padauk"
+            android:text="လင်းခန့်ရောခေါ်ခဲ့တော့တဲ့" />
+        <TextView
+            android:id="@+id/UnpaidSum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UNpaid"
+            android:layout_below="@id/paidSum"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/UnpaidSum"
+            android:id="@+id/barrelPrice"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalD"
+            android:layout_below="@id/barrelPrice"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalL"
+            android:layout_below="@id/totalD"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalMain"
+            android:layout_below="@id/totalL"/>
+
+    </RelativeLayout>
+</ScrollView>

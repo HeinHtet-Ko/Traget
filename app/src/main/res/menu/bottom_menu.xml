@@ -16,9 +16,9 @@
         android:id="@+id/unpaid_menu"/>
     <item
         app:showAsAction="always"
-        android:title="Paid"
+        android:title="Maintenance"
         android:orderInCategory="3"
-        android:icon="@drawable/ic_baseline_money_off_24"
+        android:icon="@drawable/ic_repair"
         android:id="@+id/paid_menu"/>
     <item
         app:showAsAction="always"
