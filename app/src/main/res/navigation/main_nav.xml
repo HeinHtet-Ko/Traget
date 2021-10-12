@@ -10,7 +10,7 @@
         android:id="@+id/home_menu"
         android:name="com.mtu.ceit.hhk.traget.ui.view.HomeFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/unpaid_menu"
         android:name="com.mtu.ceit.hhk.traget.ui.view.ClientFragment"
@@ -26,4 +26,8 @@
         android:name="com.mtu.ceit.hhk.traget.ui.view.PetrolFragment"
         android:label="fragment_petrol"
         tools:layout="@layout/fragment_petrol" />
+    <fragment
+        android:id="@+id/setting_menu"
+        android:name="com.mtu.ceit.hhk.traget.ui.view.SettingFragment"
+        android:label="Setting" />
 </navigation>

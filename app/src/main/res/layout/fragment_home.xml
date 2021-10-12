@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.view.HomeFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="70dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/fr_home_barchart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/paidsum_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Total Paid Amount - "
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_barchart"
+            style="@style/labeltextstyle"/>
+
+        <TextView
+            android:id="@+id/fr_home_paidsum_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0Ks"
+            app:layout_constraintBottom_toBottomOf="@+id/paidsum_label"
+            app:layout_constraintStart_toEndOf="@+id/paidsum_label"
+            app:layout_constraintTop_toTopOf="@+id/paidsum_label"
+            style="@style/labeltextstyle"/>
+
+        <TextView
+
+            style="@style/labeltextstyle"
+            android:id="@+id/unpaid_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Total UnPaid Amount - "
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@+id/paidsum_label" />
+
+        <TextView
+            android:id="@+id/fr_home_unpaidsum_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0Ks"
+            app:layout_constraintBottom_toBottomOf="@+id/unpaid_label"
+            app:layout_constraintStart_toEndOf="@+id/unpaid_label"
+            app:layout_constraintTop_toTopOf="@+id/unpaid_label"
+            style="@style/labeltextstyle"/>
+
+        <TextView
+
+           style="@style/labeltextstyle"
+            android:id="@+id/maintain_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Total Maintenance Cost - "
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_unpaidsum_tv" />
+
+        <TextView
+            android:id="@+id/fr_home_maintainsum_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0Ks"
+            app:layout_constraintBottom_toBottomOf="@+id/maintain_label"
+            app:layout_constraintStart_toEndOf="@+id/maintain_label"
+            app:layout_constraintTop_toTopOf="@+id/maintain_label"
+            style="@style/labeltextstyle"/>
+
+
+        <TextView
+            android:id="@+id/diesel_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Total Diesel Cost - "
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_maintainsum_tv"
+            style="@style/labeltextstyle"/>
+
+        <TextView
+            android:id="@+id/fr_home_dieselsum_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0Ks"
+            app:layout_constraintBottom_toBottomOf="@+id/diesel_label"
+            app:layout_constraintStart_toEndOf="@+id/diesel_label"
+            app:layout_constraintTop_toTopOf="@+id/diesel_label"
+            style="@style/labeltextstyle"/>
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/fr_home_piechart"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_dieselsum_tv" />
+
+        <TextView
+            style="@style/labeltextstyle"
+            android:id="@+id/rv_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Rotavator Running Time - "
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_piechart" />
+        <TextView
+            style="@style/labeltextstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fr_home_rvsum_tv"
+            app:layout_constraintStart_toEndOf="@id/rv_label"
+            app:layout_constraintTop_toTopOf="@id/rv_label"/>
+
+        <TextView
+            style="@style/labeltextstyle"
+            android:text="Total Harrow Running Time - "
+            app:layout_constraintTop_toBottomOf="@id/fr_home_rvsum_tv"
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            android:id="@+id/hr_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            style="@style/labeltextstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fr_home_hrsum_tv"
+            app:layout_constraintStart_toEndOf="@id/hr_label"
+            app:layout_constraintTop_toTopOf="@id/hr_label"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textguidline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="40dp" />
+
+
+        <View
+
+            android:id="@+id/paid_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/paidsum_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/paidsum_label" />
+        <View
+
+            android:id="@+id/unpaid_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/unpaid_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/unpaid_label" />
+        <View
+
+            android:id="@+id/maintain_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/maintain_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/maintain_label" />
+        <View
+
+            android:id="@+id/diesel_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/diesel_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/diesel_label" />
+        <View
+            android:id="@+id/rv_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/rv_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/rv_label"/>
+        <View
+            android:id="@+id/hr_legend"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/hr_label"
+            app:layout_constraintEnd_toStartOf="@id/textguidline"
+            app:layout_constraintTop_toTopOf="@id/hr_label"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

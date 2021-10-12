@@ -26,5 +26,11 @@
         android:orderInCategory="4"
         android:icon="@drawable/ic_petrol"
         android:id="@+id/petrol_menu"/>
+    <item
+        android:id="@+id/setting_menu"
+        android:title="Setting"
+        android:orderInCategory="5"
+        android:icon="@drawable/ic_setting"
+        app:showAsAction="always"/>
 
 </menu>

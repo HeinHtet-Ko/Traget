@@ -15,18 +15,12 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) :ViewModel(){
 
 
-     var paidSum:LiveData<Int?> = MutableLiveData()
-
-     var unPaidSum:LiveData<Int?> = MutableLiveData()
-
-     var barrelSum:LiveData<Int?> = MutableLiveData()
-
+    var paidSum:LiveData<Int?> = MutableLiveData()
+    var unPaidSum:LiveData<Int?> = MutableLiveData()
+    var barrelSum:LiveData<Int?> = MutableLiveData()
     var maintenanceSum:LiveData<Int?> = MutableLiveData()
     var dollarSum:LiveData<Int?> = MutableLiveData()
-
-
-
-    lateinit var linpanSum:LiveData<Int?>
+    var linpanSum:LiveData<Int?> = MutableLiveData()
 
 
 
@@ -74,6 +68,27 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         viewModelScope.launch(Dispatchers.IO) {
             maintenanceSum = repository.getTotalMaintenance().asLiveData()
         }
+    }
+
+    fun combineMin():LiveData<ArrayList<Int?>> {
+        val mediatorLiveData = MediatorLiveData<ArrayList<Int?>>()
+        val lp = linpanSum
+        val dollar = dollarSum
+        var isLpEmitted = false
+        var isDollarEmitted = false
+
+        mediatorLiveData.addSource(dollar){
+            isDollarEmitted = true
+            if(isDollarEmitted && isLpEmitted)
+                mediatorLiveData.value = arrayListOf(dollar.value,lp.value)
+        }
+        mediatorLiveData.addSource(lp){
+            isLpEmitted = true
+            if(isDollarEmitted && isLpEmitted)
+                mediatorLiveData.value = arrayListOf(dollar.value,lp.value)
+        }
+
+        return mediatorLiveData
     }
 
     fun combineListen():LiveData<ArrayList<Int?>> {

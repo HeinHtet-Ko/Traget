@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Traget" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Traget" parent="Theme.MaterialComponents.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -9,8 +9,21 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="pieHoleColor">#434141</item>
+        <item name="barChartLabelColor">#BFC9D5</item>
+
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="labeltextstyle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">#BFC9D5</item>
+        <item name="android:typeface">normal</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">@font/bf</item>
+    </style>
+
+
 </resources>

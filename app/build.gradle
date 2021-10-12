@@ -78,4 +78,7 @@ dependencies {
     implementation "com.github.PhilJay:MPAndroidChart:$mpchart"
 
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+
 }
