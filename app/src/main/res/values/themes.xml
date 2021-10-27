@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:statusBarColor">@color/darkblue</item>
+    </style>
+
     <style name="Theme.Traget" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#424D8F</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">#032541</item>
+        <item name="colorPrimaryVariant">@color/darkblue</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
@@ -24,6 +30,21 @@
         <item name="fontStyle">normal</item>
         <item name="android:textSize">17sp</item>
         <item name="fontFamily">@font/bf</item>
+    </style>
+    <style name="clientitemtextstyle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">#2A3B4E</item>
+        <item name="android:typeface">normal</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/bf</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="addFABstyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:layout_marginBottom">75dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="fabCustomSize">50dp</item>
+        <item name="android:src">@drawable/ic_add</item>
+        <item name="backgroundTint">@color/fabColor</item>
     </style>
 
 </resources>

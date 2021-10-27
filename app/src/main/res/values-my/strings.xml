@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Traget</string>
+  <string name="home_label_total_paid">တစ်ရွာလုံးလင်းအောင် ပူဇော်ပေးလေရဲ့ - </string>
+    <string name="home_label_total_unpaid">အနောက်ကျောင်းဘုန်းကြီးက - </string>
+    <string name="home_label_total_maintain">အိမ်ရှေ့ခန်း ချိတ်ရလို့ မဆိုးဘူ - </string>
+    <string name="home_label_total_diesel">ကျောင်းကတော့ပြီးအောင်တက်ချင်- </string>
+</resources>

@@ -14,17 +14,11 @@ import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface NightPref {
-    fun isNightMode(): Flow<Boolean>
-
-    suspend fun setNightMode(isNight:Boolean)
-}
-
 @Singleton
-class NightPrefImpl @Inject constructor(@ApplicationContext context:Context ) {
+class NightPref @Inject constructor(@ApplicationContext context:Context ) {
 
 
-        val ds = context.createDataStore(name = "isNightStore")
+        val ds = context.createDataStore(name = "isNight_store")
 
 
      fun isNightMode(): Flow<Boolean> = ds.data.catch { exception ->
@@ -47,7 +41,7 @@ class NightPrefImpl @Inject constructor(@ApplicationContext context:Context ) {
     }
 
     companion object {
-        val prefKey = preferencesKey<Boolean>("isNightMode")
+         val prefKey = preferencesKey<Boolean>("isNightMode")
     }
 
 }

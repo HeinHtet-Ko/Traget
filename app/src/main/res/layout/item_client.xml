@@ -1,37 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="10dp"
-    android:layout_margin="5dp"
-    android:background="#8164AA"
-    android:layout_width="match_parent" android:layout_height="75dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/noText"/>
+    android:paddingStart="5dp"
+    android:layout_margin="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+
 
     <TextView
-        android:layout_toRightOf="@id/noText"
+
+
+        style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nameText"
-        android:text="U Aung San"/>
+        android:text="1."
+        android:id="@+id/item_client_no_tv"/>
+
     <TextView
-        android:layout_toRightOf="@id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/typeText"
-        android:text="Dollar"/>
+        android:id="@+id/item_client_name_tv"
+        style="@style/clientitemtextstyle"
+        android:layout_width="170dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginStart="4dp"
+        android:layout_toRightOf="@id/item_client_no_tv"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="U Aung San" />
     <TextView
-        android:layout_toRightOf="@id/typeText"
+
+        style="@style/clientitemtextstyle"
+        android:layout_marginStart="3dp"
+
+        android:layout_toRightOf="@id/item_client_name_tv"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_client_mac_tv"
+        android:text="Rotavator"/>
+    <TextView
+
+        style="@style/clientitemtextstyle"
+        android:layout_toRightOf="@id/item_client_mac_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timeText"
+        android:layout_marginStart="13dp"
+        android:id="@+id/item_client_time_tv"
         android:text="3:30"/>
     <TextView
-        android:layout_toRightOf="@id/timeText"
+        android:layout_marginEnd="8dp"
+        android:layout_alignParentEnd="true"
+        style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/amtText"
+        android:id="@+id/item_client_amt_tv"
         android:text="105000" />
 
 </RelativeLayout>

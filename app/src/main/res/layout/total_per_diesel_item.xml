@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#81C8F3"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+  <TextView
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="20dp"
+      android:layout_marginBottom="7dp"
+    style="@style/labeltextstyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tot_per_ds_amtlabel_tv"
+    android:text="Total Earned From This Barrel - "/>
+    <TextView
+        android:layout_alignTop="@id/tot_per_ds_amtlabel_tv"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/tot_per_ds_amtlabel_tv"
+        style="@style/labeltextstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tot_per_ds_amt_tv"
+        android:text="0 Ks"/>
+    <TextView
+        style="@style/labeltextstyle"
+        android:id="@+id/tot_per_ds_rvlabel_tv"
+        android:layout_marginBottom="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/tot_per_ds_amtlabel_tv"
+        android:layout_below="@+id/tot_per_ds_amtlabel_tv"
+        android:text="Total Rotavator Time - "/>
+    <TextView
+        android:layout_alignTop="@id/tot_per_ds_rvlabel_tv"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/tot_per_ds_rvlabel_tv"
+        style="@style/labeltextstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tot_per_ds_rv_tv"
+        android:text="0 Min"/>
+    <TextView
+        android:layout_alignStart="@id/tot_per_ds_amtlabel_tv"
+        style="@style/labeltextstyle"
+        android:id="@+id/tot_per_ds_hrlabel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Harrow Time - "
+        android:layout_below="@id/tot_per_ds_rvlabel_tv"/>
+    <TextView
+        android:layout_alignTop="@id/tot_per_ds_hrlabel_tv"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/tot_per_ds_hrlabel_tv"
+        style="@style/labeltextstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tot_per_ds_hr_tv"
+        android:text="0 Min"/>
+</RelativeLayout>

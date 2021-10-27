@@ -7,5 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="isPaid">#3DD17B</color>
+    <color name="isUnpaid">#F4461B</color>
+    <color name="fabColor">#196695</color>
+    <color name="darkblue">#032541</color>
 </resources>

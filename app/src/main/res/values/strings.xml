@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Traget</string>
+    <string name="home_label_total_paid">Total Paid Amount - </string>
+    <string name="home_label_total_unpaid">Total UnPaid Amount - </string>
+    <string name="home_label_total_maintain">Total Maintenance Amount - </string>
+    <string name="home_label_total_diesel">Total Diesel Amount - </string>
 </resources>

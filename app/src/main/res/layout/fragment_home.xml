@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.view.HomeFragment"
+    tools:context=".ui.home.HomeFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="70dp"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Total Paid Amount - "
+            android:text="@string/home_label_total_paid"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@id/fr_home_barchart"
             style="@style/labeltextstyle"/>
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Total UnPaid Amount - "
+            android:text="@string/home_label_total_unpaid"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@+id/paidsum_label" />
 
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Total Maintenance Cost - "
+            android:text="@string/home_label_total_maintain"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@id/fr_home_unpaidsum_tv" />
 
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Total Diesel Cost - "
+            android:text="@string/home_label_total_diesel"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@id/fr_home_maintainsum_tv"
             style="@style/labeltextstyle"/>

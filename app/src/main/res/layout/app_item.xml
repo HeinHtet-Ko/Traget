@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="50dp" android:background="#7AA4B8">
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#7AA4B8"
+    android:paddingStart="5dp"
+    android:layout_margin="3dp"
+    >
 
     <TextView
+
+        style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/app_id"/>
+        android:id="@+id/app_item_no_tv"/>
     <TextView
-        android:layout_toRightOf="@id/app_id"
-        android:layout_width="wrap_content"
+        android:layout_marginStart="10dp"
+
+        android:ellipsize="end"
+        style="@style/clientitemtextstyle"
+        android:layout_toRightOf="@id/app_item_no_tv"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/app_name"/>
+        android:id="@+id/app_item_name_tv"/>
     <TextView
-        android:layout_toRightOf="@id/app_name"
+        style="@style/clientitemtextstyle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/app_price"/>
+        android:id="@+id/app_item_price_tv"/>
 
 
 </RelativeLayout>

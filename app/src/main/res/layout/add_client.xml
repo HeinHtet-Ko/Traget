@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="1000dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -19,7 +19,6 @@
 
     <TimePicker
         android:layout_centerHorizontal="true"
-        android:tag="Good"
         android:layout_below="@id/nameLayout"
         android:id="@+id/tPicker"
         android:timePickerMode="spinner"
@@ -29,21 +28,29 @@
 
     <com.google.android.material.chip.ChipGroup
         android:layout_centerHorizontal="true"
-
         android:id="@+id/chipGroup"
         app:singleSelection="true"
+        app:selectionRequired="true"
+        app:checkedChip="@id/dollarChip"
         android:layout_below="@id/tPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <com.google.android.material.chip.Chip
 
-            android:text="Dollar"
+            app:checkedIconTint="@color/fabColor"
+            app:checkedIconEnabled="true"
+            android:text="Rotavator"
+            app:checkedIcon="@drawable/ic_add"
             android:id="@+id/dollarChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Chip.Choice"/>
         <com.google.android.material.chip.Chip
-            android:text="Lin Pan"
+            app:rippleColor="@color/fabColor"
+            app:checkedIconTint="@color/fabColor"
+            app:checkedIconEnabled="true"
+            app:checkedIcon="@drawable/ic_add"
+            android:text="Harrow"
             android:id="@+id/lpChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +76,8 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:text="Add"
-        android:layout_height="wrap_content"
+        app:backgroundTint="@color/fabColor"
+        android:layout_height="200dp"
         android:id="@+id/addBtn"
         android:layout_below="@id/barrelNoLayout"
         android:layout_margin="10dp"

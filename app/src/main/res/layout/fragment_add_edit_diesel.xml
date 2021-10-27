@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        style="@style/labeltextstyle"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add A Diesel Barrel"
+        android:id="@+id/fr_addEdit_ds_label"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fr_addEdit_ds_priceLy"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fr_addEdit_ds_price_edT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Put a price"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fr_addEdit_ds_apply_btn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/fabColor"
+        android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="@id/fr_addEdit_ds_cancel_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fr_addEdit_ds_cancel_btn"
+        app:layout_constraintTop_toTopOf="@id/fr_addEdit_ds_cancel_btn"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fr_addEdit_ds_cancel_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toStartOf="@id/fr_addEdit_ds_apply_btn"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fr_addEdit_ds_priceLy" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.view.MaintenanceFragment"
+    tools:context=".ui.maintain.MaintenanceFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/app_recycler"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+       android:layout_height="wrap_content"
+       android:id="@+id/fr_maintain_recycler"
+       />
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
+       style="@style/addFABstyle"
+       android:id="@+id/fr_maintain_fab"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentBottom="true"/>
 </RelativeLayout>

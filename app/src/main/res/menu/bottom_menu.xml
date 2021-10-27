@@ -13,19 +13,19 @@
         android:title="Clients"
         android:orderInCategory="2"
         android:icon="@drawable/ic_money"
-        android:id="@+id/unpaid_menu"/>
+        android:id="@+id/clients_menu"/>
     <item
         app:showAsAction="always"
         android:title="Maintenance"
         android:orderInCategory="3"
         android:icon="@drawable/ic_repair"
-        android:id="@+id/paid_menu"/>
+        android:id="@+id/maintain_menu"/>
     <item
         app:showAsAction="always"
-        android:title="Petrol"
+        android:title="Diesel"
         android:orderInCategory="4"
         android:icon="@drawable/ic_petrol"
-        android:id="@+id/petrol_menu"/>
+        android:id="@+id/diesel_menu"/>
     <item
         android:id="@+id/setting_menu"
         android:title="Setting"

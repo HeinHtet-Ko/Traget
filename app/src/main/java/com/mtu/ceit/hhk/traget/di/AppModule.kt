@@ -32,7 +32,7 @@ object AppModule {
     fun provideBarrelDAO(db: ClientDB) = db.getBarrelDAO()
 
     @Provides
-    fun provideAppDAO(db: ClientDB) = db.getAppDAO()
+    fun provideAppDAO(db: ClientDB) = db.getMaintainDAO()
 
     @Provides
     @Singleton
