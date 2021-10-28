@@ -36,13 +36,17 @@ abstract class ClientDB :RoomDatabase(){
 
                 barDao.insertDiesel(Diesel(1,price = 350000))
                 barDao.insertDiesel(Diesel(2,price = 250000))
+                barDao.insertDiesel(Diesel(3,price = 4000000))
 
-                appDao.insertMaintain(Maintenance(name = "CrossBar",price = 8000))
+                appDao.insertMaintain(Maintenance(name = "CrossBar",price = 80000))
+                appDao.insertMaintain(Maintenance(name = "Rv Teeth",price = 50000))
                 appDao.insertMaintain(Maintenance(name = "Battery",price = 150000))
 
-                dao.insertClient(Client(barrelId = 1,name = "Aero",timeTaken = 90,amount = 30000,isPaid = false,macType = "Rotavator",note = "20000Paid"))
-                dao.insertClient(Client(barrelId = 1,name = "Blith",timeTaken = 30,amount = 15000,isPaid = true,macType = "Harrow"))
-                dao.insertClient(Client(barrelId = 2,name = "Cisco",timeTaken = 120,amount = 60000,isPaid = true,macType = "Harrow",note = "5000short"))
+                dao.insertClient(Client(barrelId = 1,name = "Michael Scott",timeTaken = 90,amount = 30000,isPaid = false,macType = "Rotavator",note = "20000Paid"))
+                dao.insertClient(Client(barrelId = 1,name = "Jim",timeTaken = 30,amount = 15000,isPaid = true,macType = "Harrow"))
+                dao.insertClient(Client(barrelId = 2,name = "Pam Beesley",timeTaken = 120,amount = 60000,isPaid = true,macType = "Harrow",note = "5000short"))
+                dao.insertClient(Client(barrelId = 2,name = "Oscar Martinez",timeTaken = 100,amount = 50000,isPaid = false,macType = "Rotavator"))
+                dao.insertClient(Client(barrelId = 2,name = "Dwight ",timeTaken = 200,amount = 100000,isPaid = true,macType = "Rotavator"))
 
             }
 

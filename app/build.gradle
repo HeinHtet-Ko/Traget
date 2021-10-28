@@ -75,6 +75,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 
     implementation "com.github.PhilJay:MPAndroidChart:$mpchart"
 
@@ -83,6 +84,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
 
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
 
 }
