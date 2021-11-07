@@ -26,7 +26,9 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
     private val vm by activityViewModels<DieselViewModel>()
     lateinit var binding:FragmentDieselBinding
     var dcAdapter:DieselWithClientAdapter = DieselWithClientAdapter()
-    private val addEditbs = AddEditDieselBottomSheet()
+    private val addEditbs by lazy {
+        AddEditDieselBottomSheet()
+    }
 
 
 
@@ -37,6 +39,8 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
         binding = FragmentDieselBinding.bind(view)
         binding.barrelRecycler.adapter = dcAdapter
         binding.barrelRecycler.itemAnimator = DefaultItemAnimator()
+
+        vm.getBarrelsWithClients()
 
         binding.frDieselFab.setOnClickListener {
 
@@ -55,21 +59,28 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
         }
 
 
+       collectEvents()
+
+
+
+    }
+
+    private fun collectEvents(){
         lifecycleScope.launch {
 
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
                 vm.mainEventFlow.collect {
                     when(it) {
-                        is MAIN_EVENT.SHOW_DIALOG -> addEditbs.show(parentFragmentManager,AddEditDieselBottomSheet.TAG)
+                        is MAIN_EVENT.SHOW_DIALOG ->{
+                            if(!addEditbs.isAdded)
+                                addEditbs.show(parentFragmentManager,AddEditDieselBottomSheet.TAG)
+                        }
                         is MAIN_EVENT.HIDE_DIALOG -> addEditbs.dismiss()
                     }
                 }
             }
 
         }
-
-
-
     }
 
 

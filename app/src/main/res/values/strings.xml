@@ -4,4 +4,48 @@
     <string name="home_label_total_unpaid">Total UnPaid Amount - </string>
     <string name="home_label_total_maintain">Total Maintenance Amount - </string>
     <string name="home_label_total_diesel">Total Diesel Amount - </string>
+    <string name="home_paidSum_str"> %1$d Ks</string>
+    <string name="home_unPaidSum_str">%1$d Ks</string>
+    <string name="home_maintainSum_str">%1$d Ks</string>
+    <string name="home_dieselSum_str">%1$d Ks</string>
+
+    <string name="pie_rv_label"> %1$d Hr %2$d Min</string>
+    <string name="home_label_total_rv">Total Rotavator Running Time - </string>
+    <string name="home_label_total_hr">Total Harrow Running Time - </string>
+    <string name="home_rv_time">%1$d Hr %2$d Min</string>
+    <string name="home_hr_time">%1$d Hr %2$d Min</string>
+
+    <string name="item_no">%1$d .</string>
+    <string name="rv_str">Rotavator</string>
+    <string name="hr_str">Harrow</string>
+    <string name="rv_short_str">(RV)</string>
+    <string name="hr_short_str">(HR)</string>
+    <string name="client_time_str">%1$d : %2$d</string>
+    <string name="client_amt_str">%1$d Ks</string>
+
+
+    <string name="maintain_item_no_str">%1$d .</string>
+    <string name="maintain_price_str">%1$d Ks</string>
+
+    <string name="chang_lang_hint">Change Language</string>
+    <string name="rv_price_str">Rotavator Per Hr</string>
+    <string name="hr_price_str">Harrow Per Hr</string>
+
+    <string name="diesel_price_hint_str">Price Per Barrel</string>
+
+    <string name="created_date_str">Created Date - %1$s</string>
+    <string name="name_hint_str">Name</string>
+    <string name="timetaken_hint_str">Time Taken</string>
+    <string name="timetaken_str"> %1$d Hr %2$d Min</string>
+    <string name="note_hint_str">Additional Note</string>
+    <string name="diesel_hint_str">Diesel No.</string>
+    <string name="cancelBtn_str">Cancel</string>
+    <string name="editBtn_str">Edit</string>
+    <string name="applyBtn_str">Apply</string>
+
+    <string name="bs_timepicker_caption" translatable="false">Choose the Time Below</string>
+    <string name="client_add_caption" translatable="false">Client Item Addition</string>
+    <string name="client_edit_caption" translatable="false">Client Item Edition</string>
+
+
 </resources>

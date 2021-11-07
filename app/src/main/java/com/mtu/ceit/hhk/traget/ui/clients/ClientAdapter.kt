@@ -11,6 +11,7 @@ import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.util.Utils
 import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.databinding.ItemClientBinding
+import com.mtu.ceit.hhk.traget.util.Constants
 
 class ClientAdapter: ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientDifferentiator()) {
 
@@ -33,17 +34,28 @@ class ClientAdapter: ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientD
 
             }
         }
+
+
+
         fun bind(client: Client) {
 
+            val res = binding.root.context.resources
             binding.apply {
+
                 itemClientNameTv.text = client.name
                 val pair:Pair<String,String> = Utils.formateDate(client.timeTaken)
-                itemClientTimeTv.text ="${pair.first}:${pair.second}"
-                itemClientAmtTv.text= client.amount.toString()
-                itemClientMacTv.text = client.macType
-                itemClientNoTv.text = "${adapterPosition+1}."
+                val timeStr = res.getString(R.string.client_time_str,pair.first.toInt(),pair.second.toInt())
+                itemClientTimeTv.text  = timeStr
+
+                val amtStr = res.getString(R.string.client_amt_str,client.amount)
+                itemClientAmtTv.text= amtStr
+
+                val hrShortStr = res.getString(R.string.hr_short_str)
+                val rvShortStr = res.getString(R.string.rv_short_str)
+                itemClientMacTv.text = if(client.macType == Constants.HARROW) hrShortStr else rvShortStr
+                itemClientNoTv.text = res.getString(R.string.item_no,(adapterPosition+1))
                 if(!client.note.isNullOrEmpty())
-                    itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_note,0,0,0)
+                    itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
 
                 if (client.isPaid)
                     root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])

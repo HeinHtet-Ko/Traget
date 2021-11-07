@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="5dp"
     android:layout_margin="3dp"
     android:layout_width="match_parent"
@@ -12,47 +13,48 @@
 
         style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1."
+        android:layout_height="match_parent"
         android:id="@+id/item_client_no_tv"/>
 
     <TextView
+
+
         android:id="@+id/item_client_name_tv"
         style="@style/clientitemtextstyle"
-        android:layout_width="170dp"
+        android:layout_width="127dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:layout_marginStart="4dp"
-        android:layout_toRightOf="@id/item_client_no_tv"
+        android:layout_toEndOf="@id/item_client_no_tv"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="U Aung San" />
+        app:drawableTint="#DD2C00" />
     <TextView
 
         style="@style/clientitemtextstyle"
-        android:layout_marginStart="3dp"
-
-        android:layout_toRightOf="@id/item_client_name_tv"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/item_client_mac_tv"
-        android:text="Rotavator"/>
-    <TextView
-
-        style="@style/clientitemtextstyle"
-        android:layout_toRightOf="@id/item_client_mac_tv"
+        android:layout_toEndOf="@id/item_client_name_tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:id="@+id/item_client_time_tv"
-        android:text="3:30"/>
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:id="@+id/item_client_mac_tv"
+        />
+
     <TextView
+
+        style="@style/clientitemtextstyle"
+        android:layout_toEndOf="@id/item_client_mac_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:id="@+id/item_client_time_tv"
+       />
+    <TextView
+
         android:layout_marginEnd="8dp"
         android:layout_alignParentEnd="true"
         style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/item_client_amt_tv"
-        android:text="105000" />
+        />
 
 </RelativeLayout>

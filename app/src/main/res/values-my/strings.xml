@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Traget</string>
-  <string name="home_label_total_paid">တစ်ရွာလုံးလင်းအောင် ပူဇော်ပေးလေရဲ့ - </string>
-    <string name="home_label_total_unpaid">အနောက်ကျောင်းဘုန်းကြီးက - </string>
-    <string name="home_label_total_maintain">အိမ်ရှေ့ခန်း ချိတ်ရလို့ မဆိုးဘူ - </string>
-    <string name="home_label_total_diesel">ကျောင်းကတော့ပြီးအောင်တက်ချင်- </string>
+  <string name="app_name">Traget</string>
+  <string name="home_label_total_paid">ရပြီးငွေ စုစုပေါင်း - </string>
+  <string name="home_label_total_unpaid">လက်ကျန်ငွေစုစုပေါင်း - </string>
+  <string name="home_label_total_diesel">ဒီဇယ်ဆီ ကုန်ကျငွေ - </string>
+  <string name="home_label_total_maintain">စက်ပြင်ဆင်ခ ကုန်ကျငွေ - </string>
+  <string name="home_paidSum_str"> %1$d ကျပ်</string>
+  <string name="home_unPaidSum_str"> %1$d ကျပ်</string>
+  <string name="home_maintainSum_str"> %1$d ကျပ်</string>
+  <string name="home_dieselSum_str"> %1$d ကျပ်</string>
+
+
+  <string name="pie_rv_label">%1$d နာရီ %2$d မိနစ်</string>
+  <string name="home_label_total_rv">ဒိုလာမောင်းချိန်ပေါင်း - </string>
+  <string name="home_label_total_hr">လင်ပန်းမောင်းချိန်ပေါင်း - </string>
+  <string name="home_rv_time">%1$d နာရီ %2$d မိနစ်</string>
+  <string name="home_hr_time">%1$d နာရီ %2$d မိနစ်</string>
+
+  <string name="item_no">%1$d .</string>
+  <string name="rv_str">ဒိုလာ</string>
+  <string name="hr_str">လင်ပန်း</string>
+  <string name="rv_short_str">(ဒ)</string>
+  <string name="hr_short_str">(လ)</string>
+  <string name="client_time_str">%1$d : %2$d</string>
+  <string name="client_amt_str">%1$d ကျပ်</string>
+
+  <string name="maintain_item_no_str">%1$d .</string>
+  <string name="maintain_price_str">%1$d ကျပ်</string>
+
+  <string name="chang_lang_hint">ဘာသာစကားပြောင်းမည်</string>
+  <string name="rv_price_str">ဒိုလာတစ်နာရီနှုန်း</string>
+  <string name="hr_price_str">လင်ပန်းတစ်နာရီနှုန်း</string>
+
+  <string name="diesel_price_hint_str">ဒီဇယ်ဈေး</string>
+  <string name="created_date_str">နေ့စွဲ %1$s</string>
+  <string name="name_hint_str">နာမည်</string>
+  <string name="timetaken_hint_str"> ကြာချိန် </string>
+  <string name="timetaken_str"> %1$d နာရီ %2$d မိနစ်</string>
+  <string name="note_hint_str">မှတ်ချက်</string>
+  <string name="diesel_hint_str">ဒီဇယ်နံပါတ်</string>
+  <string name="cancelBtn_str">ပယ်ဖျက်မည်</string>
+  <string name="editBtn_str">ပြင်ဆင်မည်</string>
+  <string name="applyBtn_str">အတည်ပြုမည်</string>
+
+
+
 </resources>

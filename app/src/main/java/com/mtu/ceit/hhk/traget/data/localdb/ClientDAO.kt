@@ -3,7 +3,7 @@ package com.mtu.ceit.hhk.traget.data.localdb
 import androidx.room.*
 import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.repos.DISPLAY_STATUS
-import com.mtu.ceit.hhk.traget.repos.SORT
+import com.mtu.ceit.hhk.traget.repos.SORT_STATUS
 
 import kotlinx.coroutines.flow.Flow
 
@@ -56,17 +56,17 @@ interface ClientDAO {
     @Query("select * from client_table where isPaid =:isPaid and name like '%' || :query || '%'  order by amount asc")
     fun getSortByAmtAscWithDisplay(query: String,isPaid: Int):Flow<List<Client>>
 
-     @Query("select * from client_table where isPaid = :isPaid and name like '%' || :query || '%'  order by date asc")
+    @Query("select * from client_table where isPaid = :isPaid and name like '%' || :query || '%'  order by date asc")
      fun getSortByDateWithDisplay(query: String,isPaid:Int):Flow<List<Client>>
 
     @Query("select * from client_table where name like '%' || :query || '%'  order by date asc")
     fun getSortByDate(query: String):Flow<List<Client>>
 
 
-     fun getSearch(query:String,sort: SORT,displayStatus: DISPLAY_STATUS):Flow<List<Client>>
+     fun getSearch(query:String,sort: SORT_STATUS,displayStatus: DISPLAY_STATUS):Flow<List<Client>>
      =
          when(sort) {
-             SORT.SortByDate -> {
+             SORT_STATUS.SortByDate -> {
                  when(displayStatus) {
                      DISPLAY_STATUS.HIDE_PAID -> getSortByDateWithDisplay(query,0)
                      DISPLAY_STATUS.HIDE_UNPAID -> getSortByDateWithDisplay(query,1)
@@ -74,7 +74,7 @@ interface ClientDAO {
                  }
 
              }
-             SORT.SortByAmtAsc -> {
+             SORT_STATUS.SortByAmtAsc -> {
 
                  when(displayStatus) {
                      DISPLAY_STATUS.HIDE_PAID -> getSortByAmtAscWithDisplay(query,0)
@@ -83,7 +83,7 @@ interface ClientDAO {
                  }
 
              }
-             SORT.SortByAmtDesc -> {
+             SORT_STATUS.SortByAmtDesc -> {
                  when(displayStatus) {
                      DISPLAY_STATUS.HIDE_PAID -> getSortByAmtDescWithDisplay(query,0)
                      DISPLAY_STATUS.HIDE_UNPAID -> getSortByAmtDescWithDisplay(query,1)

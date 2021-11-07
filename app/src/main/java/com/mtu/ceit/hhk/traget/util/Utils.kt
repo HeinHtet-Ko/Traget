@@ -49,10 +49,6 @@ class Utils {
                Pair(hour.toString(),"$min")
         }
 
-        const val HARROW = "Harrow"
-        const val ROTAVATOR = "Rotavator"
-        const val ADD_CLIENT_OK = 1
-        const val EDIT_CLIENT_OK = 2
     }
 
 

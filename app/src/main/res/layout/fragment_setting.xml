@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="150dp"
+        android:text="@string/chang_lang_hint"
+        android:id="@+id/fr_setting_lang_sw"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -29,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="HR Price"
+            android:hint="@string/hr_price_str"
             android:inputType="number"
             android:id="@+id/fr_setting_hrPrice_edText"
             android:layout_width="match_parent"
@@ -52,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:hint="RV Price"
+            android:hint="@string/rv_price_str"
             android:inputType="number"
             android:id="@+id/fr_setting_rvPrice_edText"
             android:layout_width="match_parent"
@@ -71,7 +81,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="@string/editBtn_str"
         app:layout_constraintEnd_toStartOf="@+id/fr_setting_price_apply_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fr_setting_rvPrice_ly" />
@@ -80,7 +90,7 @@
         android:id="@+id/fr_setting_price_apply_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Apply"
+        android:text="@string/applyBtn_str"
         app:layout_constraintBottom_toBottomOf="@id/fr_setting_price_edit_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fr_setting_price_edit_btn"

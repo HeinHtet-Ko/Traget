@@ -1,13 +1,11 @@
 package com.mtu.ceit.hhk.traget.ui.home
 
-import android.util.Log
+
 import androidx.lifecycle.*
 import com.mtu.ceit.hhk.traget.repos.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -42,43 +40,40 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         getTotalMaintance()
         getTotalRotavator()
         getTotalHarrow()
-        Timber.tag("timberlog").e("OnInitViewModel")
+
     }
 
     private fun getPaidSum() {
-        viewModelScope.launch() {
+        viewModelScope.launch{
             _paidSum.value = (repository.getPaidSum())
-            Timber.tag("diselclient").e("${_paidSum.value}  phaha")
         }
     }
 
-    fun getUnPaidSum() {
-        viewModelScope.launch(Dispatchers.IO) {
+    private fun getUnPaidSum() {
+        viewModelScope.launch{
             _unPaidSum.postValue(repository.getUnPaidSum())
-            Timber.tag("diselclient").e("${_unPaidSum.value} backg")
         }
     }
 
-    fun getDieselSum() {
-        viewModelScope.launch {
-            _dieselSum.value = repository.getDieselTotal()
+    private fun getDieselSum() {
+        viewModelScope.launch(IO) {
+            _dieselSum.postValue(repository.getDieselTotal())
         }
     }
 
-
-    fun getTotalMaintance() {
-        viewModelScope.launch(Dispatchers.IO) {
+    private fun getTotalMaintance() {
+        viewModelScope.launch(IO) {
             _mainTainSum.postValue(repository.getTotalMaintenance())
         }
     }
 
-    fun getTotalRotavator() {
+    private fun getTotalRotavator() {
         viewModelScope.launch {
             rvSum = repository.getTotalRo().asLiveData()
         }
     }
 
-    fun getTotalHarrow() {
+    private fun getTotalHarrow() {
         viewModelScope.launch {
             hrSum = repository.getTotalHr().asLiveData()
         }

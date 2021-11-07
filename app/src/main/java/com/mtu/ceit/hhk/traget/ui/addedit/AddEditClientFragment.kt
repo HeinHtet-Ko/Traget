@@ -2,22 +2,24 @@ package com.mtu.ceit.hhk.traget.ui.addedit
 
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.util.Utils
 import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.databinding.FragmentAddEditClientBinding
-import com.mtu.ceit.hhk.traget.util.setext
+import com.mtu.ceit.hhk.traget.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.DateFormat
 
@@ -27,6 +29,13 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
     private val vm by viewModels<AddEditClientViewModel>()
     lateinit var  binding:FragmentAddEditClientBinding
+
+    val addTimebs by lazy { AddTimeBottomSheet() }
+
+    private var timeMins:Int = 0
+    private var macItemPos:Int = -1
+    private var amount:Int = 0
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,71 +47,93 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
 
 
-        if(vm.client == null )
-        observeActiveDiesel()
+        if(vm.isNew){
+            observeActiveDiesel()
+        }else{
+            bindUi(vm.client!!)
+        }
 
-        clickListen()
+        collectEvents()
 
-        collect()
-
-        observePrice()
-
+    }
+    private fun viewComponentsInit()
+    {
         binding.apply {
-            vm.client?.let {
 
+            frAddEditAddTimeLayout.setStartIconOnClickListener {
+                vm.onTimeStartIconClick()
+            }
 
-                frAddEditNameEdT.setText(it.name)
-                frAddEditNoteEdtext.setText(it.note)
-                frAddEditDieselNoEdT.setText(it.barrelId.toString())
-                frAddEditDateTv.text =  "Created at - ${DateFormat.getDateInstance().format(it.date)}"
+            val macList = listOf(getString(R.string.hr_str), getString(R.string.rv_str))
+            val adapter = context?.let { ArrayAdapter(it, R.layout.mac_type_item, macList) }
+            frAddEditMacAutocomplete.setAdapter(adapter)
+            frAddEditMacAutocomplete.setText(macList[0],false)
 
-
-                val checkID = when(it.macType) {
-                    Utils.ROTAVATOR -> R.id.fr_addEdit_rv_chip
-                    Utils.HARROW -> R.id.fr_addEdit_hr_chip
-                    else -> R.id.fr_addEdit_hr_chip
+            frAddEditDieselLayout.setStartIconOnClickListener {
+                frAddEditDieselNoEdt.apply {
+                    isEnabled = !isEnabled
                 }
-                frAddEditChipGroup.check(checkID)
-
-               val time =  Utils.formateDate(it.timeTaken)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    frAddEditTp.hour = time.first.toInt()
-                    frAddEditTp.minute = time.second.toInt()
+            }
+            frAddEditNoteLayout.setStartIconOnClickListener {
+                frAddEditNoteEdtext.apply {
+                    isEnabled = !isEnabled
                 }
+            }
+
+
+            frAddEditConfirmBtn.setOnClickListener {
+                gatherInputs()
+                vm.onSubmitClick()
+            }
+            frAddEditCancelBtn.setOnClickListener {
+                vm.onCancelClick()
+            }
+
+            AddTimeBottomSheet.timeChangeListener = { hr, min ->
+
+                timeMins = (hr * 60) + min
+                val str = getString(R.string.timetaken_str,hr,min)
+                binding.frAddEditTimeEdT.setText(str)
+
+            }
+
+            frAddEditMacAutocomplete.setOnItemClickListener { _, _, position, _ ->
+
+                Timber.tag("posTrack").e(position.toString())
+                macItemPos = position
+
 
             }
 
         }
-
-
 
     }
 
-
-    private fun observePrice() {
-        vm.rvPrice.observe(viewLifecycleOwner){
-            Timber.tag("nummob").e("$it  good ")
-        }
-        vm.hrPrice.observe(viewLifecycleOwner){
-
-        }
-
-    }
-
-
-
-    private fun viewComponentsInit(){
+    private fun bindUi(client: Client)
+    {
         binding.apply {
-            frAddEditTp.setIs24HourView(true)
+            frAddEditNameEdt.setText(client.name)
+            frAddEditNoteEdtext.setText(client.note)
+            val pair = Utils.formateDate(client.timeTaken)
+            val str = getString(R.string.timetaken_str,pair.first.toInt(),pair.second.toInt())
+            frAddEditTimeEdT.setText(str)
+            frAddEditDieselNoEdt.setText(client.barrelId.toString())
+            frAddEditDateTv.text = getString(R.string.created_date_str,DateFormat.getDateInstance().format(client.date).toString())
 
-            frAddEditNoteCb.setOnCheckedChangeListener { _, b ->
-                frAddEditNoteEdtext.isEnabled = !b
+            timeMins = client.timeTaken
+            macItemPos = if(client.macType == Constants.ROTAVATOR) 1 else 0
+
+            val checkID = when(client.macType) {
+                Constants.ROTAVATOR -> R.string.rv_str
+                Constants.HARROW -> R.string.hr_str
+                else -> R.string.hr_str
             }
-            frAddEditDieselCb.setOnCheckedChangeListener { _, b ->
-                frAddEditDieselNoEdT.isEnabled = !b
-            }
+
+            frAddEditMacAutocomplete.setText(getString(checkID),false)
+            frAddEditConfirmBtn.text = getString(R.string.editBtn_str)
+
+
         }
-
     }
 
     private fun observeActiveDiesel()
@@ -110,96 +141,83 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
         vm.activeID.observe(viewLifecycleOwner){
 
-            binding.frAddEditDieselNoEdT.setText(it?.toString())
+            binding.frAddEditDieselNoEdt.setText(it?.toString())
 
         }
     }
 
-    private fun validateInput(){
+    private fun gatherInputs()
+    {
         binding.apply {
-
-            if(frAddEditNameEdT.text.isNullOrEmpty())
+            if(frAddEditNameEdt.text.isNullOrEmpty())
+            {
                 vm.errorMes.value = "Name Field Required!"
+
+            }
+            else if (timeMins == 0 && frAddEditTimeEdT.text.isNullOrEmpty() ){
+                vm.errorMes.value = "Time Field Required!"
+
+            }
+
+            else if (frAddEditDieselNoEdt.text.isNullOrEmpty())
+            {
+                vm.errorMes.value = "Diesel No Required!"
+            }
             else {
-                var name = ""
-                name = frAddEditNameEdT.text.toString().trim()
 
-                var mins = 0
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    mins = frAddEditTp.hour * 60
-                    mins += frAddEditTp.minute
-                } else {
-                    mins = frAddEditTp.currentHour * 60
-                    mins += frAddEditTp.currentMinute
+                vm.errorMes.value = null
+                val name = frAddEditNameEdt.text.toString()
+                val macType = if (macItemPos == 1) Constants.ROTAVATOR else Constants.HARROW
+                val bId = frAddEditDieselNoEdt.text.toString().toInt()
+                val note = frAddEditNoteEdtext.text.toString()
+
+
+                if(macItemPos == 1 ){
+                    amount = calculateAmt(vm.rvPrice,timeMins)
+                }
+                else {
+                    amount = calculateAmt(vm.hrPrice,timeMins)
                 }
 
-                var macType = ""
-                var amount = 0
-                val hrPerMin = vm.hrPrice.value?.div(60)
-                val rvPerMin = vm.rvPrice.value?.div(60)
-
-                when (frAddEditChipGroup.checkedChipId) {
-                    R.id.fr_addEdit_rv_chip -> {
-                        macType = Utils.ROTAVATOR
-                        Timber.tag("nummob").e(rvPerMin.toString()+"rv")
-                        amount = mins * rvPerMin!!
-                    }
-                    R.id.fr_addEdit_hr_chip -> {
-                        macType = Utils.HARROW
-                        Timber.tag("nummob").e(hrPerMin.toString()+"hr")
-                        amount = mins * hrPerMin!!
-                    }
-                }
-
-                val dId = frAddEditDieselNoEdT.text.toString().toInt()
-
-                val note = frAddEditNoteEdtext.text.toString().trim()
-
-                vm.newClient.value = Client(name = name, timeTaken = mins, amount = amount, macType = macType, barrelId = dId,note = note)
+                vm.newClient.value = Client(name = name,timeTaken = timeMins,macType = macType,amount = amount,barrelId = bId,note = note)
 
             }
         }
     }
 
-    private fun clickListen(){
-
-        binding.apply {
-
-            frAddEditConfirmBtn.setOnClickListener {
-
-                    validateInput()
-                    vm.onSubmitClick()
-            }
-            frAddEditCancelBtn.setOnClickListener {
-                    findNavController().popBackStack()
-            }
-        }
+    private fun calculateAmt(price:Int,timeMin:Int): Int
+    {
+        Timber.tag("amounttracker").e("in calcu $price $timeMin")
+        return price.div(60).times(timeMin)
     }
 
-    private fun collect(){
-        lifecycleScope.launchWhenStarted {
+    private fun collectEvents()
+    {
+        lifecycleScope.launch {
 
-            vm.addEditClientEventFlow.collect {
-                when(it) {
-                    is AddEditClientViewModel.AddEditClientEvent.ShowInvalidMessage ->{
-                        Snackbar.make(requireView(),it.message,3000).show()
-                    }
-                    is AddEditClientViewModel.AddEditClientEvent.NavigateBack -> {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                        findNavController().popBackStack()
+                launch {
+                    vm.addEditClientEventFlow.collect {
+                        when(it) {
+                            is AddEditClientViewModel.AddEditClientEvent.ShowInvalidMessage ->{
+                                Snackbar.make(requireView(),it.message,3000).show()
+                            }
+                             is AddEditClientViewModel.AddEditClientEvent.NavigateBack -> {
+                                findNavController().popBackStack()
+                            }
+                            AddEditClientViewModel.AddEditClientEvent.ShowTimePicker -> {
+                                addTimebs.show(parentFragmentManager,AddTimeBottomSheet.TAG)
+                            }
+                        }
                     }
                 }
+
             }
+
+
         }
     }
-
-
-
-
-
-
-
-
-
 
 }
+

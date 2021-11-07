@@ -1,49 +1,44 @@
 package com.mtu.ceit.hhk.traget.repos
 
-import com.mtu.ceit.hhk.traget.data.HidePrefs
+import com.mtu.ceit.hhk.traget.data.DisplayStatusPrefs
 import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.data.localdb.ClientDAO
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
- class ClientRepository @Inject constructor(private val dao: ClientDAO,private val hidePrefs:HidePrefs) {
+ class ClientRepository @Inject constructor(private val dao: ClientDAO,private val displayStatusPrefs: DisplayStatusPrefs) {
 
 
-     suspend fun hidePaid(isHide:Boolean) {
-         hidePrefs.hidePaid(isHide)
+
+     fun displayStatus() = displayStatusPrefs.displayStatus()
+
+     suspend fun setDisplayStatus(status: DISPLAY_STATUS) {
+         displayStatusPrefs.editDisplayStatus(status)
      }
-
-     suspend fun hideUnPaid(isHide: Boolean){
-         hidePrefs.hideUnPaid(isHide)
-     }
-
-     fun isHidePaid() = hidePrefs.isHidePaid()
-
-     fun isHideUnPaid() = hidePrefs.isHideUnPaid()
 
      suspend fun deleteClient(client: Client) {
          dao.deleteClients(client)
      }
 
-     suspend fun changePayStatus(status:UPDATE_PAY,id:Int) {
+     suspend fun changePayStatus(status:PAY_STATUS,id:Int) {
 
          when(status) {
-             UPDATE_PAY.ToPaid -> dao.updateToPaid(id)
-             UPDATE_PAY.ToUnPaid -> dao.updateToUnPaid(id)
+             PAY_STATUS.ToPaid -> dao.updateToPaid(id)
+             PAY_STATUS.ToUnPaid -> dao.updateToUnPaid(id)
          }
 
      }
 
-     fun getSearch(query:String,sort: SORT,displayStatus: DISPLAY_STATUS):Flow<List<Client>> = dao.getSearch(query,sort,displayStatus)
+     fun getSearch(query:String,sort: SORT_STATUS,displayStatus: DISPLAY_STATUS):Flow<List<Client>> = dao.getSearch(query,sort,displayStatus)
 
 
 
  }
 
-enum class UPDATE_PAY{
+enum class PAY_STATUS{
     ToPaid,ToUnPaid
 }
-enum class SORT {
+enum class SORT_STATUS {
     SortByAmtDesc,SortByAmtAsc,SortByDate
 }
 enum class DISPLAY_STATUS {

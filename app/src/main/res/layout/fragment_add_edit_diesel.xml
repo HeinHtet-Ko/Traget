@@ -31,7 +31,7 @@
             android:id="@+id/fr_addEdit_ds_price_edT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Put a price"
+            android:hint="@string/diesel_price_hint_str"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -41,7 +41,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/fabColor"
-        android:text="Apply"
+        android:text="@string/applyBtn_str"
         app:layout_constraintBottom_toBottomOf="@id/fr_addEdit_ds_cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fr_addEdit_ds_cancel_btn"
@@ -54,7 +54,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Cancel"
+        android:text="@string/cancelBtn_str"
         app:layout_constraintEnd_toStartOf="@id/fr_addEdit_ds_apply_btn"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"

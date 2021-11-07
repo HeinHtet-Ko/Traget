@@ -45,7 +45,7 @@ class AddEditDieselBottomSheet:BottomSheetDialogFragment() {
         binding.frAddEditDsPriceEdT.addTextChangedListener {
 
             if(it.toString().isNotEmpty())
-            vm.new_price.value = it.toString().toInt()
+            vm.newPrice.value = it.toString().toInt()
 
         }
 

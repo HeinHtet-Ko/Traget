@@ -11,4 +11,5 @@
     <color name="isUnpaid">#F4461B</color>
     <color name="fabColor">#196695</color>
     <color name="darkblue">#032541</color>
+    <color name="iconTint">#093E68</color>
 </resources>

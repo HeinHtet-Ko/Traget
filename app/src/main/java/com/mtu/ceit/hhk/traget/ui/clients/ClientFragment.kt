@@ -16,35 +16,39 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.databinding.FragmentClientsBinding
 import com.mtu.ceit.hhk.traget.repos.DISPLAY_STATUS
-import com.mtu.ceit.hhk.traget.repos.SORT
+import com.mtu.ceit.hhk.traget.repos.SORT_STATUS
 import com.mtu.ceit.hhk.traget.ui.adapter.ClientAdapter
 import com.mtu.ceit.hhk.traget.util.onQueryChanged
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import timber.log.Timber
 
 @AndroidEntryPoint
 class ClientFragment :Fragment(R.layout.fragment_clients) {
 
 
-    lateinit var binding:FragmentClientsBinding
-    lateinit var clientAdapter: ClientAdapter
-
-
+    val clientAdapter: ClientAdapter = ClientAdapter()
     val clientVM: ClientViewModel by viewModels()
 
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentClientsBinding.bind(view)
+        val binding = FragmentClientsBinding.bind(view)
 
 
-        clientVM.sort.value = SORT.SortByDate
-        clientAdapter = ClientAdapter()
 
+        viewInit(binding)
+
+        observeList()
+
+        setHasOptionsMenu(true)
+    }
+
+    private fun viewInit(binding: FragmentClientsBinding){
         binding.frClientsRecycler.apply {
             adapter = clientAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
-
         }
 
         clientAdapter.longClick = {
@@ -76,14 +80,10 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
                         clientVM.onSwipeRight(client.id)
                     }
                 }
-                Toast.makeText(requireContext(),"Siwpe",Toast.LENGTH_LONG).show()
 
-//                clientAdapter.notifyDataSetChanged()
             }
 
         }).attachToRecyclerView(binding.frClientsRecycler)
-
-
 
         binding.frClientsFab.setOnClickListener {
 
@@ -91,38 +91,32 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
             findNavController().navigate(action)
 
         }
-
-
-        setHasOptionsMenu(true)
     }
 
-    override fun onResume() {
-        super.onResume()
-        clientVM._clients.observe(viewLifecycleOwner){
+    @ExperimentalCoroutinesApi
+    private fun observeList(){
+        clientVM.clients.observe(viewLifecycleOwner){
 
             clientAdapter.submitList(it)
         }
-
     }
 
-    fun observeHide(menu: Menu){
+
+    private fun observeDisplayStatus(menu: Menu){
 
         clientVM.displayStatus.observe(viewLifecycleOwner) {
             when (it) {
                 DISPLAY_STATUS.HIDE_PAID -> {
                     menu.findItem(R.id.action_hide_paid).isChecked = true
-                    clientVM.hideUnPaid(false)
-                    clientVM.hidePaid(true)
+                    clientVM.onChooseHidePaid()
                 }
                 DISPLAY_STATUS.HIDE_UNPAID ->{
                     menu.findItem(R.id.action_hide_unpaid).isChecked = true
-                    clientVM.hidePaid(false)
-                    clientVM.hideUnPaid(true)
+                    clientVM.onChooseHideUnPaid()
                 }
                 DISPLAY_STATUS.SHOW_ALL ->{
-                menu.findItem(R.id.action_show_all).isChecked = true
-                    clientVM.hidePaid(false)
-                    clientVM.hideUnPaid(false)
+                    menu.findItem(R.id.action_show_all).isChecked = true
+                    clientVM.onChooseShowAll()
                 }
             }
         }
@@ -139,7 +133,7 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
             clientVM.searchQuery.value = it
         }
 
-        observeHide(menu)
+        observeDisplayStatus(menu)
 
 
     }
@@ -147,19 +141,20 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.action_sort_by_amt_desc -> {
-                clientVM.sort.value = SORT.SortByAmtDesc
+                clientVM.sort.value = SORT_STATUS.SortByAmtDesc
                 true
             }
             R.id.action_sort_by_amt_asc -> {
-                clientVM.sort.value = SORT.SortByAmtAsc
+                clientVM.sort.value = SORT_STATUS.SortByAmtAsc
                 true
             }
             R.id.action_sort_by_date -> {
-                clientVM.sort.value = SORT.SortByDate
+                clientVM.sort.value = SORT_STATUS.SortByDate
                 true
             }
             R.id.action_hide_paid -> {
                 item.isChecked = !item.isChecked
+
                 clientVM.displayStatus.value = DISPLAY_STATUS.HIDE_PAID
                 true
             }

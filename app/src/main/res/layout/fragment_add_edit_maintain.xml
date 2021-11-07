@@ -60,10 +60,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fr_addEdit_mt_apply_btn"
-        android:layout_width="110dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/fabColor"
-        android:text="Apply"
+        android:text="@string/applyBtn_str"
         app:layout_constraintBottom_toBottomOf="@id/fr_addEdit_mt_cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fr_addEdit_mt_cancel_btn"
@@ -73,10 +73,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fr_addEdit_mt_cancel_btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="110dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Cancel"
+        android:text="@string/cancelBtn_str"
         app:layout_constraintEnd_toStartOf="@id/fr_addEdit_mt_apply_btn"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"

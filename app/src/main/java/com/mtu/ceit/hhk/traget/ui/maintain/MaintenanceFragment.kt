@@ -30,54 +30,68 @@ class MaintenanceFragment:Fragment(R.layout.fragment_maintenance) {
 
 
     val vm: MaintenanceViewModel by activityViewModels()
-    private val addEditbottomsheet = AddEditMaintainBottomSheet()
-     private var adapter: MaintainAdapter = MaintainAdapter()
+    private val addEditbottomsheet by lazy {
+       AddEditMaintainBottomSheet()
+    }
+    private var adapter: MaintainAdapter = MaintainAdapter()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding: FragmentMaintenanceBinding = FragmentMaintenanceBinding.bind(view)
-        binding.frMaintainRecycler.adapter = adapter
 
-        binding.frMaintainRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
-
-
-        addEditbottomsheet.isCancelable = false
+        viewInit(binding)
 
         vm.getMaintainList()
 
         vm.maintains.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-
             binding.frMaintainRecycler.scrollToPosition(it.size-3)
-
         }
 
+        collectEvents()
+
+        adapter.itemClickListen = {
+            vm.onMaintainItemClick(it)
+        }
+
+
+    }
+
+
+    private fun collectEvents(){
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
 
                 vm.mainEventFlow.collect {
                     when(it) {
-                        is MAIN_EVENT.SHOW_DIALOG -> addEditbottomsheet.show(parentFragmentManager,AddEditMaintainBottomSheet.TAG)
-                        is MAIN_EVENT.HIDE_DIALOG -> addEditbottomsheet.dismiss()
+                        MAIN_EVENT.SHOW_DIALOG ->{
+                            if(!addEditbottomsheet.isAdded)
+                                addEditbottomsheet.show(parentFragmentManager,AddEditMaintainBottomSheet.TAG)
+                        }
+                        MAIN_EVENT.HIDE_DIALOG -> addEditbottomsheet.dismiss()
 
                     }
                 }
 
             }
         }
+    }
 
-        binding.frMaintainFab.setOnClickListener{
+    private fun viewInit(binding: FragmentMaintenanceBinding){
 
-            vm.onFABClick()
+        binding.apply {
+            frMaintainFab.setOnClickListener {
+                vm.onFABClick()
+            }
 
+            frMaintainRecycler.adapter = adapter
+            frMaintainRecycler.layoutManager =  LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,true)
         }
 
-        adapter.itemClickListen = {
 
-            vm.onMaintainItemClick(it)
 
-        }
+
     }
 
 

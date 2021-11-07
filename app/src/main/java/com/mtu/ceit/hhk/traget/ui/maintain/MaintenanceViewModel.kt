@@ -40,7 +40,8 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
     }
 
 
-     fun getMaintainList() {
+     fun getMaintainList()
+     {
         viewModelScope.launch {
             _maintains.value = repository.getMaintains().first()
 
@@ -48,7 +49,8 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
     }
 
 
-    fun updateMaintain(maintain: Maintenance) {
+    private fun updateMaintain(maintain: Maintenance)
+    {
         viewModelScope.launch {
             repository.updateMaintain(maintain)
             mainEventChannel.send(MAIN_EVENT.HIDE_DIALOG)
@@ -62,7 +64,6 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
         viewModelScope.launch {
             mainEventChannel.send(MAIN_EVENT.SHOW_DIALOG)
         }
-
     }
 
 
@@ -74,8 +75,6 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
         viewModelScope.launch {
             mainEventChannel.send(MAIN_EVENT.SHOW_DIALOG)
             dialogChannel.send(DIALOG_EVENT.BIND_EDITTEXT(maintain))
-
-
         }
 
 

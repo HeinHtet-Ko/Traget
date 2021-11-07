@@ -13,6 +13,7 @@ import com.mtu.ceit.hhk.traget.data.model.Diesel
 import com.mtu.ceit.hhk.traget.databinding.DieselItemBinding
 import com.mtu.ceit.hhk.traget.databinding.ItemClientBinding
 import com.mtu.ceit.hhk.traget.databinding.TotalPerDieselItemBinding
+import com.mtu.ceit.hhk.traget.util.Constants
 import com.mtu.ceit.hhk.traget.util.Utils
 import timber.log.Timber
 import java.lang.IllegalArgumentException
@@ -121,7 +122,7 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
                     item.dieselwithCli.clientList.forEach { client ->
 
                         amt += client.amount
-                        if(client.macType == Utils.HARROW){
+                        if(client.macType == Constants.HARROW){
                             hr += client.timeTaken
                         }else{
                             rv += client.timeTaken
@@ -201,21 +202,38 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
     }
 
      class ClientChildViewHolder(val binding:ItemClientBinding):DieselWithClientViewHolder(binding){
-        fun bind(client:Client){
 
-            binding.apply {
-                itemClientNoTv.text = ""
-                itemClientNameTv.text = client.name
-                itemClientMacTv.text = client.macType
-                itemClientTimeTv.text = client.timeTaken.toString()
-                itemClientAmtTv.text = client.amount.toString()
 
-               val color =  if(client.isPaid) 0 else 1
+         fun bind(client: Client) {
 
-                root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[color])
+             val res = binding.root.context.resources
+             binding.apply {
 
-            }
-        }
+                 itemClientNameTv.text = client.name
+                 val pair:Pair<String,String> = Utils.formateDate(client.timeTaken)
+                 val timeStr = res.getString(R.string.client_time_str,pair.first.toInt(),pair.second.toInt())
+                 itemClientTimeTv.text  = timeStr
+
+                 val amtStr = res.getString(R.string.client_amt_str,client.amount)
+                 itemClientAmtTv.text= amtStr
+
+                 val hrShortStr = res.getString(R.string.hr_short_str)
+                 val rvShortStr = res.getString(R.string.rv_short_str)
+                 itemClientMacTv.text = if(client.macType == Constants.HARROW) hrShortStr else rvShortStr
+                 itemClientNoTv.text = res.getString(R.string.item_no,(adapterPosition+1))
+                 if(!client.note.isNullOrEmpty())
+                     itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
+
+                 if (client.isPaid)
+                     root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])
+                 else
+                     root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[1])
+
+
+             }
+
+         }
+
     }
 
     class TotalChildViewHolder(val binding:TotalPerDieselItemBinding):DieselWithClientViewHolder(binding){

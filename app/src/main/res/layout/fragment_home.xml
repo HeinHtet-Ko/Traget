@@ -35,10 +35,10 @@
             style="@style/labeltextstyle"/>
 
         <TextView
+            android:text="@string/home_paidSum_str"
             android:id="@+id/fr_home_paidsum_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0Ks"
             app:layout_constraintBottom_toBottomOf="@+id/paidsum_label"
             app:layout_constraintStart_toEndOf="@+id/paidsum_label"
             app:layout_constraintTop_toTopOf="@+id/paidsum_label"
@@ -59,7 +59,7 @@
             android:id="@+id/fr_home_unpaidsum_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0Ks"
+            android:text="@string/home_unPaidSum_str"
             app:layout_constraintBottom_toBottomOf="@+id/unpaid_label"
             app:layout_constraintStart_toEndOf="@+id/unpaid_label"
             app:layout_constraintTop_toTopOf="@+id/unpaid_label"
@@ -80,7 +80,7 @@
             android:id="@+id/fr_home_maintainsum_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0Ks"
+            android:text="@string/home_maintainSum_str"
             app:layout_constraintBottom_toBottomOf="@+id/maintain_label"
             app:layout_constraintStart_toEndOf="@+id/maintain_label"
             app:layout_constraintTop_toTopOf="@+id/maintain_label"
@@ -101,7 +101,7 @@
             android:id="@+id/fr_home_dieselsum_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0Ks"
+            android:text="@string/home_dieselSum_str"
             app:layout_constraintBottom_toBottomOf="@+id/diesel_label"
             app:layout_constraintStart_toEndOf="@+id/diesel_label"
             app:layout_constraintTop_toTopOf="@+id/diesel_label"
@@ -121,7 +121,7 @@
             android:id="@+id/rv_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Rotavator Running Time - "
+            android:text="@string/home_label_total_rv"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@id/fr_home_piechart" />
         <TextView
@@ -129,22 +129,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fr_home_rvsum_tv"
+            android:text="@string/home_rv_time"
             app:layout_constraintStart_toEndOf="@id/rv_label"
             app:layout_constraintTop_toTopOf="@id/rv_label"/>
 
         <TextView
-            style="@style/labeltextstyle"
-            android:text="Total Harrow Running Time - "
-            app:layout_constraintTop_toBottomOf="@id/fr_home_rvsum_tv"
-            app:layout_constraintLeft_toRightOf="@id/textguidline"
             android:id="@+id/hr_label"
+            style="@style/labeltextstyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/home_label_total_hr"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/textguidline"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_rvsum_tv" />
         <TextView
             style="@style/labeltextstyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fr_home_hrsum_tv"
+            android:text="@string/home_hr_time"
             app:layout_constraintStart_toEndOf="@id/hr_label"
             app:layout_constraintTop_toTopOf="@id/hr_label"/>
 

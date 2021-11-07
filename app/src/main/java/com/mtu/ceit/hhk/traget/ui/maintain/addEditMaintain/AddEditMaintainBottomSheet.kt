@@ -37,7 +37,9 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
 
          binding = FragmentAddEditMaintainBinding.bind(view)
 
-        binding.apply {
+        this.isCancelable = false
+
+         binding.apply {
             frAddEditMtNameEdT.addTextChangedListener {
                 vm.maintainName.value = it.toString()
             }
@@ -58,31 +60,33 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
                 vm.onEditClick()
 
         }
+        collectEvents()
+    }
 
-       lifecycleScope.launch {
-           lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+    private fun collectEvents(){
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
 
-               vm.dialogFlow.collect {
-                   when(it) {
-                       is DIALOG_EVENT.BIND_EDITTEXT<*>->
-                           setEditText(it.data as Maintenance)
-                       is DIALOG_EVENT.SHOW_ERROR ->
-                           Snackbar.make(view.rootView,it.message,Snackbar.LENGTH_LONG).show()
+                vm.dialogFlow.collect {
+                    when(it) {
+                        is DIALOG_EVENT.BIND_EDITTEXT<*>->
+                            setEditText(it.data as Maintenance)
+                        is DIALOG_EVENT.SHOW_ERROR ->
+                            Snackbar.make(requireView().rootView,it.message,Snackbar.LENGTH_LONG).show()
 
-                   }
-               }
-           }
+                    }
+                }
+            }
 
-           }
-       }
-
+        }
+    }
 
     private fun setEditText(maintain:Maintenance){
 
         binding.apply {
             frAddEditMtPriceEdT.setText(maintain.price.toString())
             frAddEditMtNameEdT.setText(maintain.name)
-            frAddEditMtApplyBtn.text = "EDIT"
+            frAddEditMtApplyBtn.text = getString(R.string.editBtn_str)
             frAddEditMtLabel.text = "Edit A Maintenance "
         }
 

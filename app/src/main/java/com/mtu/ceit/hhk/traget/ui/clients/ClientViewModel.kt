@@ -18,28 +18,21 @@ import javax.inject.Inject
 class ClientViewModel @Inject constructor(private val repository: ClientRepository):ViewModel() {
 
 
-    var clients:MutableLiveData<List<Client>> = MutableLiveData()
-
     val searchQuery:MutableLiveData<String>  = MutableLiveData("")
-    val sort:MutableLiveData<SORT> = MutableLiveData()
+    val sort:MutableLiveData<SORT_STATUS> = MutableLiveData(SORT_STATUS.SortByDate)
 
-   // val isHidePaid:MutableLiveData<Boolean> = MutableLiveData()
 
     var displayStatus:MutableLiveData<DISPLAY_STATUS> = MutableLiveData()
 
-
-
-
     init {
         getDisplayStatus()
-
-       // observe()
 
     }
 
 
 
-    var _clients:LiveData<List<Client>> = combine(searchQuery.asFlow(),sort.asFlow(),displayStatus.asFlow()){
+    @ExperimentalCoroutinesApi
+    var clients:LiveData<List<Client>> = combine(searchQuery.asFlow(),sort.asFlow(),displayStatus.asFlow()){
         search,sort,displayStatus -> Triple(search,sort,displayStatus)
     }.flatMapLatest {
         triple ->
@@ -48,54 +41,29 @@ class ClientViewModel @Inject constructor(private val repository: ClientReposito
 
     private fun getDisplayStatus(){
         viewModelScope.launch {
-
-            val isHidePaid = repository.isHidePaid().first()
-            val isHideUnPaid = repository.isHideUnPaid().first()
-
-            if(isHidePaid) displayStatus.value = DISPLAY_STATUS.HIDE_PAID
-            if(isHideUnPaid) displayStatus.value = DISPLAY_STATUS.HIDE_UNPAID
-            if((!isHidePaid && !isHideUnPaid)) {
-
-                displayStatus.value = DISPLAY_STATUS.SHOW_ALL
-                Timber.tag("clientinit").e("initial $isHidePaid $isHideUnPaid")
-            }
-
-
+            val status = DISPLAY_STATUS.valueOf(repository.displayStatus().first())
+            displayStatus.value = status
         }
     }
 
-    private fun observe(){
+
+    fun onChooseHidePaid(){
         viewModelScope.launch {
-
-            displayStatus.asFlow().collect {
-                    when(it) {
-                        DISPLAY_STATUS.HIDE_PAID ->
-                        {
-                            repository.hidePaid(true)
-                            repository.hideUnPaid(false)
-                        }
-
-                        DISPLAY_STATUS.HIDE_UNPAID -> {
-                            repository.hideUnPaid(true)
-                            repository.hidePaid(false)
-                        }
-                    }
-            }
+            repository.setDisplayStatus(DISPLAY_STATUS.HIDE_PAID)
         }
-
     }
 
-    fun hideUnPaid(isHide:Boolean) {
+    fun onChooseHideUnPaid(){
         viewModelScope.launch {
-            repository.hideUnPaid(isHide)
+            repository.setDisplayStatus(DISPLAY_STATUS.HIDE_UNPAID)
+
         }
     }
 
-     fun hidePaid(isHide:Boolean) {
-         viewModelScope.launch {
-             repository.hidePaid(isHide)
-         }
-
+    fun onChooseShowAll(){
+        viewModelScope.launch {
+            repository.setDisplayStatus(DISPLAY_STATUS.SHOW_ALL)
+        }
     }
 
     fun removeClient(client: Client) {
@@ -104,22 +72,16 @@ class ClientViewModel @Inject constructor(private val repository: ClientReposito
         }
     }
 
-
     fun onSwipeRight(id:Int){
         viewModelScope.launch {
-            repository.changePayStatus(UPDATE_PAY.ToPaid,id)
+            repository.changePayStatus(PAY_STATUS.ToPaid,id)
         }
     }
 
     fun onSwipeLeft(id:Int){
         viewModelScope.launch {
-            repository.changePayStatus(UPDATE_PAY.ToUnPaid,id)
+            repository.changePayStatus(PAY_STATUS.ToUnPaid,id)
         }
     }
-
-
-
-
-
 
 }

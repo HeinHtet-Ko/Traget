@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.data.model.Maintenance
 import com.mtu.ceit.hhk.traget.databinding.AppItemBinding
 
@@ -24,9 +25,16 @@ class MaintainAdapter: ListAdapter<Maintenance, MaintainAdapter.MaintainViewHold
 
         fun bind(app:Maintenance){
             binding.apply {
-                appItemNoTv.text = app.id.toString()
+
+                val res = root.resources
+
+                val noStr = res.getString(R.string.maintain_item_no_str,(adapterPosition+1))
+                appItemNoTv.text = noStr
+
                 appItemNameTv.text = app.name
-                appItemPriceTv.text = app.price.toString()
+
+                val priceStr = res.getString(R.string.maintain_price_str,app.price)
+                appItemPriceTv.text = priceStr
             }
 
         }
