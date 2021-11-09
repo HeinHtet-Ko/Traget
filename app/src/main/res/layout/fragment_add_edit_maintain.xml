@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <TextView
         style="@style/labeltextstyle"
         android:layout_marginTop="15dp"
@@ -27,7 +29,9 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_avatar"
+        app:startIconTint="@color/iconTint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fr_addEdit_mt_name_edT"
@@ -47,7 +51,9 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fr_addEdit_mt_nameLy">
+        app:layout_constraintTop_toBottomOf="@id/fr_addEdit_mt_nameLy"
+        app:startIconDrawable="@drawable/ic_money"
+        app:startIconTint="@color/iconTint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fr_addEdit_mt_price_edT"
@@ -57,6 +63,18 @@
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/fr_addEdit_mt_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fr_addEdit_mt_priceLy" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fr_addEdit_mt_apply_btn"
@@ -80,7 +98,7 @@
         app:layout_constraintEnd_toStartOf="@id/fr_addEdit_mt_apply_btn"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fr_addEdit_mt_priceLy" />
+        app:layout_constraintTop_toBottomOf="@id/fr_addEdit_mt_date_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

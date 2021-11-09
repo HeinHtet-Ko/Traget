@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
-@Database(version = 9,entities = [Client::class,Diesel::class,Maintenance::class],exportSchema = false)
+@Database(version = 10,entities = [Client::class,Diesel::class,Maintenance::class],exportSchema = false)
 abstract class ClientDB :RoomDatabase(){
 
     abstract fun getDAO(): ClientDAO

@@ -72,15 +72,13 @@ class ClientViewModel @Inject constructor(private val repository: ClientReposito
         }
     }
 
-    fun onSwipeRight(id:Int){
+    fun onSwipe(id:Int,isPaid:Boolean){
         viewModelScope.launch {
-            repository.changePayStatus(PAY_STATUS.ToPaid,id)
-        }
-    }
+            if (isPaid)
+                repository.changePayStatus(PAY_STATUS.ToPaid,id)
+            else
+                repository.changePayStatus(PAY_STATUS.ToUnPaid,id)
 
-    fun onSwipeLeft(id:Int){
-        viewModelScope.launch {
-            repository.changePayStatus(PAY_STATUS.ToUnPaid,id)
         }
     }
 

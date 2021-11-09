@@ -99,11 +99,12 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
             frAddEditMacAutocomplete.setOnItemClickListener { _, _, position, _ ->
 
-                Timber.tag("posTrack").e(position.toString())
                 macItemPos = position
 
 
             }
+
+            frAddEditDateTv.text = getString(R.string.created_date_str,DateFormat.getDateInstance().format(System.currentTimeMillis()).toString())
 
         }
 
@@ -187,7 +188,7 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
     private fun calculateAmt(price:Int,timeMin:Int): Int
     {
-        Timber.tag("amounttracker").e("in calcu $price $timeMin")
+
         return price.div(60).times(timeMin)
     }
 

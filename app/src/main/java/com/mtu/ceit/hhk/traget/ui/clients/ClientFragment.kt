@@ -1,11 +1,13 @@
 package com.mtu.ceit.hhk.traget.ui.clients
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.databinding.FragmentClientsBinding
 import com.mtu.ceit.hhk.traget.repos.DISPLAY_STATUS
@@ -61,7 +64,7 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
             findNavController().navigate(action)
         }
 
-        ItemTouchHelper(object :ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+        ItemTouchHelper(object :ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ){
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
 
                 return false
@@ -73,13 +76,35 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
                 when(direction) {
                     ItemTouchHelper.LEFT -> {
 
-                        clientVM.onSwipeLeft(client.id)
-                    }
-                    ItemTouchHelper.RIGHT -> {
+                        val arr = arrayOf<String>("Burmese","English")
 
-                        clientVM.onSwipeRight(client.id)
+                        val ad = MaterialAlertDialogBuilder(requireContext())
+                       val d=  ad
+                               .setPositiveButton("Ok") { _, _ ->
+                                   clientVM.onSwipe(client.id,!client.isPaid)
+                               }
+                               .setNegativeButton("Cancel"){ _, i ->
+
+                               }
+                               .setItems(arr){ _,which ->
+
+                                   Toast.makeText(requireContext(),which.toString(),Toast.LENGTH_LONG).show()
+
+                               }
+                               .setCancelable(false)
+                               .setIcon(R.drawable.ic_money)
+                               .setTitle("Change Pay Status")
+                               .create()
+                        d.show()
+
+
+
+
                     }
+
                 }
+
+                clientAdapter.notifyDataSetChanged()
 
             }
 

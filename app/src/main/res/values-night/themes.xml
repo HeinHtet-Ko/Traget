@@ -18,11 +18,36 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="labeltextstyle" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:padding">3dp</item>
         <item name="android:textColor">#BFC9D5</item>
         <item name="android:typeface">normal</item>
         <item name="fontStyle">normal</item>
         <item name="android:textSize">17sp</item>
         <item name="fontFamily">@font/bf</item>
+    </style>
+
+    <style name="settingtext" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/iconTint</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:drawableStart">@drawable/ic_setting_arrow</item>
+        <item name="fontFamily">@font/bf</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_centerVertical">true</item>
+
+    </style>
+
+    <style name="settingvaluetext" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/iconTint</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd">20dp</item>
+
+
     </style>
 
 

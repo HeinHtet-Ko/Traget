@@ -22,6 +22,7 @@ import com.mtu.ceit.hhk.traget.util.DIALOG_EVENT
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.DateFormat
 
 class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
 
@@ -52,6 +53,9 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
         binding.frAddEditMtCancelBtn.setOnClickListener {
             vm.onCancelClick()
         }
+
+        if(vm.editMaintain.value == null )
+            binding.frAddEditMtDateTv.text = getString(R.string.created_date_str, DateFormat.getDateInstance().format(System.currentTimeMillis()).toString())
 
         binding.frAddEditMtApplyBtn.setOnClickListener {
             if(vm.editMaintain.value == null)
@@ -88,6 +92,8 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
             frAddEditMtNameEdT.setText(maintain.name)
             frAddEditMtApplyBtn.text = getString(R.string.editBtn_str)
             frAddEditMtLabel.text = "Edit A Maintenance "
+
+            frAddEditMtDateTv.text = getString(R.string.created_date_str, DateFormat.getDateInstance().format(maintain.date).toString())
         }
 
     }

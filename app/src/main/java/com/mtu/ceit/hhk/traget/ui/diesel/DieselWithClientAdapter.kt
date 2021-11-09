@@ -3,6 +3,7 @@ package com.mtu.ceit.hhk.traget.ui.diesel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.github.mikephil.charting.utils.ColorTemplate
@@ -26,11 +27,6 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
 
     var itemList = mutableListOf<DieselWithClientModel>()
-        set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DieselWithClientViewHolder {
@@ -68,17 +64,13 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
                     val isExpanded = (item).isExpanded
                     if(isExpanded)
                     {
-                        val ls = itemList
-                       itemList = collapse(position,ls)
+                        itemList = collapse(position,itemList)
                         item.isExpanded = false
-                    }else{
-                        val ls = itemList
-                       val pair = expand(position,ls)
-                        itemList = pair.first
-                        notifyItemRangeInserted(1+position,pair.second+1)
+                    }
+                    else{
+                        itemList= expand(position,itemList)
                         item.isExpanded = true
                     }
-
 
 
                 }
@@ -107,50 +99,46 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
     }
 
 
-    fun expand(position: Int,listItem:MutableList<DieselWithClientModel>):Pair<MutableList<DieselWithClientModel>,Int> {
-        val item = listItem[position]
+    private fun calculateTotal(clients: List<Client>):Triple<String,String,String>
+    {
+
+        var hr = 0
+        var rv = 0
+        var amt = 0
+
+        if(!clients.isNullOrEmpty()){
+              clients.forEach { client ->
+                  amt += client.amount
+                  if(client.macType == Constants.HARROW){
+                      hr += client.timeTaken
+                  }else{
+                      rv += client.timeTaken
+                  }
+              }
+        }
+
+        return Triple(amt.toString(),rv.toString(),hr.toString())
+    }
+
+    private fun expand(position: Int, listItem:MutableList<DieselWithClientModel>):MutableList<DieselWithClientModel>
+    {
+        val item = listItem[position] as DieselWithClientModel.Parent_Diesel
         var nextPosition = position
-        var expandedSize = 0
-        when(item) {
-            is DieselWithClientModel.Parent_Diesel -> {
 
-                var hr = 0
-                var rv = 0
-                var amt = 0
 
-                if(!item.dieselwithCli.clientList.isNullOrEmpty()){
-                    item.dieselwithCli.clientList.forEach { client ->
-
-                        amt += client.amount
-                        if(client.macType == Constants.HARROW){
-                            hr += client.timeTaken
-                        }else{
-                            rv += client.timeTaken
-                        }
-                    }
+                    val trip = calculateTotal(item.dieselwithCli.clientList)
                     val ls =  item.dieselwithCli.clientList.map { DieselWithClientModel.Child_Client(it) }
-                    listItem.add(++nextPosition,DieselWithClientModel.Child_Total(Triple(amt.toString(),rv.toString(),hr.toString())))
+                    listItem.add(++nextPosition,DieselWithClientModel.Child_Total(trip))
                     listItem.addAll(++nextPosition,ls)
-                    expandedSize = ls.size
+
                     notifyItemRangeInserted((1+position),ls.size+1)
 
 
-
-                }else{
-
-
-                }
-            }
-            else -> {
-
-            }
-        }
-
-        return Pair(listItem,expandedSize)
+        return listItem
 
     }
 
-    fun collapse (position:Int,listItem:MutableList<DieselWithClientModel>):MutableList<DieselWithClientModel>
+    private fun collapse (position:Int, listItem:MutableList<DieselWithClientModel>):MutableList<DieselWithClientModel>
     {
         val nextPosition = position +1
         outerloop@ while(true){
@@ -171,7 +159,7 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
 sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHolder(binding.root){
 
-    class DieselParentViewHolder(val binding:DieselItemBinding):DieselWithClientViewHolder(binding){
+     class DieselParentViewHolder(val binding:DieselItemBinding):DieselWithClientViewHolder(binding){
 
         var itemLongClick : ((Int)->Unit)? = null
 
@@ -225,9 +213,9 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
                      itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
 
                  if (client.isPaid)
-                     root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])
+                     root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.paid_client)
                  else
-                     root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[1])
+                     root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.unpaid_client)
 
 
              }
@@ -236,7 +224,7 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
 
     }
 
-    class TotalChildViewHolder(val binding:TotalPerDieselItemBinding):DieselWithClientViewHolder(binding){
+     class TotalChildViewHolder(val binding:TotalPerDieselItemBinding):DieselWithClientViewHolder(binding){
         fun bind(totals:Triple<String,String,String>){
             binding.apply {
                 totPerDsAmtTv.text = ("${totals.first} Ks")

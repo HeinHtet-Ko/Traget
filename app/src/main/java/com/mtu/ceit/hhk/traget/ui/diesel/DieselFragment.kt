@@ -38,6 +38,7 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
 
         binding = FragmentDieselBinding.bind(view)
         binding.barrelRecycler.adapter = dcAdapter
+
         binding.barrelRecycler.itemAnimator = DefaultItemAnimator()
 
         vm.getBarrelsWithClients()
@@ -55,6 +56,7 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
 
             val ls = dieselsWithClients.map { DieselWithClientModel.Parent_Diesel(it) }
             dcAdapter.itemList = ls.toMutableList()
+            dcAdapter.notifyDataSetChanged()
 
         }
 

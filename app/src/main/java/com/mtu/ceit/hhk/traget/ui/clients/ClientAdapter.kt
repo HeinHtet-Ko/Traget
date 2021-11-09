@@ -1,12 +1,15 @@
 package com.mtu.ceit.hhk.traget.ui.adapter
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.color.MaterialColors
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.util.Utils
 import com.mtu.ceit.hhk.traget.data.model.Client
@@ -58,9 +61,14 @@ class ClientAdapter: ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientD
                     itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
 
                 if (client.isPaid)
-                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])
+                    root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.paid_client)
                 else
-                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[1])
+                    root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.unpaid_client)
+
+//                if (client.isPaid)
+//                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])
+//                else
+//                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[1])
 
 
             }

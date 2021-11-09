@@ -57,4 +57,28 @@
         <item name="android:textStyle">italic</item>
     </style>
 
+    <style name="settingtext" parent="Widget.AppCompat.TextView">
+
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/iconTint</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:drawableStart">@drawable/ic_setting_arrow</item>
+        <item name="fontFamily">@font/bf</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_centerVertical">true</item>
+
+    </style>
+
+    <style name="settingvaluetext" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/iconTint</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginEnd">20dp</item>
+
+
+    </style>
+
 </resources>

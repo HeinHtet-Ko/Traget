@@ -8,5 +8,6 @@ data class Maintenance(
         @PrimaryKey(autoGenerate = true)
         val id:Int =0 ,
         val name:String,
-        val price:Int
+        val price:Int,
+        val date:Long = System.currentTimeMillis()
 )

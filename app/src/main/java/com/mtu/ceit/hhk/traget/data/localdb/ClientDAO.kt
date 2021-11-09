@@ -20,7 +20,7 @@ interface ClientDAO {
     @Insert
     suspend fun insertClient(client: Client)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     suspend fun updateClient(client:Client)
 
     @Query("select sum(amount) as total from client_table where isPaid = 0 ")
