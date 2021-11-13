@@ -10,6 +10,7 @@
     <color name="isPaid">#3DD17B</color>
     <color name="isUnpaid">#FFD600</color>
     <color name="fabColor">#196695</color>
-    <color name="darkblue">#032541</color>
+    <color name="darkblue">#202757</color>
     <color name="iconTint">#093E68</color>
+    <color name="appPrimaryColor">#424D91</color>
 </resources>

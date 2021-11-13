@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -46,7 +47,13 @@ class MainActivity : AppCompatActivity() {
         observeFragmentDestination()
 
 
+        supportActionBar?.apply {
 
+            setDisplayUseLogoEnabled(false)
+            //setDisplayHomeAsUpEnabled(true)
+            //setHomeAsUpIndicator(R.drawable.ic_analytics)
+           // setLogo(R.drawable.ic_money)
+        }
 
     }
 

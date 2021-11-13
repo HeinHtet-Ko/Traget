@@ -1,5 +1,7 @@
 package com.mtu.ceit.hhk.traget.ui.clients
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
@@ -11,20 +13,34 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mtu.ceit.hhk.traget.R
+import com.mtu.ceit.hhk.traget.data.model.Client
 import com.mtu.ceit.hhk.traget.databinding.FragmentClientsBinding
 import com.mtu.ceit.hhk.traget.repos.DISPLAY_STATUS
 import com.mtu.ceit.hhk.traget.repos.SORT_STATUS
 import com.mtu.ceit.hhk.traget.ui.adapter.ClientAdapter
+import com.mtu.ceit.hhk.traget.util.Constants
+import com.mtu.ceit.hhk.traget.util.DialogBuilder
 import com.mtu.ceit.hhk.traget.util.onQueryChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.io.File
+import java.nio.file.Files.delete
 
 @AndroidEntryPoint
 class ClientFragment :Fragment(R.layout.fragment_clients) {
@@ -33,20 +49,131 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
     val clientAdapter: ClientAdapter = ClientAdapter()
     val clientVM: ClientViewModel by viewModels()
 
+    lateinit var job: Job
+
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentClientsBinding.bind(view)
 
-
-
         viewInit(binding)
 
         observeList()
 
         setHasOptionsMenu(true)
+
+
+
+
     }
+
+    private fun readCSV(){
+
+
+
+        var id:Int = 0
+        var bID:Int = 0
+        var name = ""
+        var time:Int = 0
+        var amt:Int = 0
+        var isPaid = false
+        var macType = Constants.ROTAVATOR
+        var note:String? = null
+        var date:Long = 0L
+
+        val file = generateFile(requireContext(),"clients.csv")
+
+        file?.let {
+
+            csvReader().open(it){
+
+                 job = lifecycleScope.launch {
+                    Timber.tag("clientstracker").e("launch")
+                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                        Timber.tag("clientstracker").e("launchstart")
+                        readAllAsSequence().asFlow().collect {
+                            it.forEachIndexed { index, s ->
+
+                                Timber.tag("clientstracker").e(s)
+                                when(index) {
+                                    0-> {
+                                        id = s.toInt()
+                                    }
+                                    1 -> {
+                                        bID = s.toInt()
+                                    }
+                                    2 -> {
+                                        name = s
+                                    }
+                                    3 -> {
+                                        time = s.toInt()
+                                    }
+                                    4 -> {
+                                        amt = s.toInt()
+                                    }
+                                    5 -> {
+                                        isPaid = s.toBoolean()
+                                    }
+                                    6 -> {
+                                        macType =s
+                                    }
+                                    7 -> {
+                                        note = s
+                                    }
+                                    8 -> {
+                                        date = s.toLong()
+                                    }
+                                }
+                            }
+                            // clients.add(Client(id,bID,name,time,amt,isPaid,macType,note,date))
+                            clientVM.insertClient(Client(id,bID,name,time,amt,isPaid,macType,note,date))
+                        }
+                    }
+
+                }
+
+
+
+
+            }
+        }
+
+
+
+
+    }
+
+
+
+    private fun generateFile(context: Context, fileName: String): File? {
+
+        val csvFile = File(context.getExternalFilesDir(null), fileName)
+        csvFile.createNewFile()
+        Timber.tag("filetracker").e(csvFile.absolutePath)
+
+        return if (csvFile.exists()) {
+            csvFile
+        } else {
+            null
+        }
+    }
+
+
+    private fun writeCSV(csvFile:File){
+
+        csvWriter().open(csvFile,append = false) {
+            clientAdapter.currentList.forEach {
+                val (id,bId,name,time,amt,isPaid,macType,note,date) = it
+                val item = listOf(id.toString(),bId.toString(),name,time.toString(),amt.toString(),isPaid.toString(),macType,note,date)
+                writeRow(item)
+            }
+
+        }
+
+
+    }
+
 
     private fun viewInit(binding: FragmentClientsBinding){
         binding.frClientsRecycler.apply {
@@ -55,7 +182,17 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
         }
 
         clientAdapter.longClick = {
-            clientVM.removeClient(it)
+
+            DialogBuilder.buildAlertDialog(requireContext(),
+
+                    {
+                        clientVM.removeClient(it)
+                    },
+                    getString(R.string.client_delete_alert,it.name)
+            ,
+                    R.drawable.delete_item
+                    )
+
 
         }
 
@@ -76,29 +213,18 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
                 when(direction) {
                     ItemTouchHelper.LEFT -> {
 
-                        val arr = arrayOf<String>("Burmese","English")
 
-                        val ad = MaterialAlertDialogBuilder(requireContext())
-                       val d=  ad
-                               .setPositiveButton("Ok") { _, _ ->
-                                   clientVM.onSwipe(client.id,!client.isPaid)
-                               }
-                               .setNegativeButton("Cancel"){ _, i ->
+                        val payStatus = if(client.isPaid) "Unpaid" else "Paid"
+                        val alertTitle = getString(R.string.client_pay_alert,client.name,payStatus)
+                        DialogBuilder.buildAlertDialog(
+                                requireContext(),
 
-                               }
-                               .setItems(arr){ _,which ->
-
-                                   Toast.makeText(requireContext(),which.toString(),Toast.LENGTH_LONG).show()
-
-                               }
-                               .setCancelable(false)
-                               .setIcon(R.drawable.ic_money)
-                               .setTitle("Change Pay Status")
-                               .create()
-                        d.show()
-
-
-
+                                {
+                                    clientVM.onSwipe(client.id,!client.isPaid)
+                                },
+                                alertTitle,
+                                R.drawable.exchange
+                        )
 
                     }
 
@@ -124,6 +250,13 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
 
             clientAdapter.submitList(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.tag("clienteo").e("onviewdestroy")
+        job.cancel()
+
     }
 
 
@@ -179,13 +312,19 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
             }
             R.id.action_hide_paid -> {
                 item.isChecked = !item.isChecked
-
-                clientVM.displayStatus.value = DISPLAY_STATUS.HIDE_PAID
+//
+//                clientVM.displayStatus.value = DISPLAY_STATUS.HIDE_PAID
+                Timber.tag("clientstracker").e("onhide")
+               readCSV()
                 true
             }
             R.id.action_hide_unpaid -> {
-                item.isChecked = !item.isChecked
-                clientVM.displayStatus.value = DISPLAY_STATUS.HIDE_UNPAID
+                Timber.tag("clientstracker").e("onunhide")
+               item.isChecked = !item.isChecked
+//                clientVM.displayStatus.value = DISPLAY_STATUS.HIDE_UNPAID
+
+               val file =  generateFile(requireContext(),"clients.csv")
+                writeCSV(file!!)
                 true
             }
             R.id.action_show_all -> {

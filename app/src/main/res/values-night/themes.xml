@@ -12,6 +12,8 @@
         <item name="pieHoleColor">#434141</item>
         <item name="barChartLabelColor">#BFC9D5</item>
 
+        <item name="dayNightColor">#DADCEC</item>
+
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

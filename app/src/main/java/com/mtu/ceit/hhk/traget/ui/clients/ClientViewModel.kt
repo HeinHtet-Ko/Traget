@@ -21,11 +21,11 @@ class ClientViewModel @Inject constructor(private val repository: ClientReposito
     val searchQuery:MutableLiveData<String>  = MutableLiveData("")
     val sort:MutableLiveData<SORT_STATUS> = MutableLiveData(SORT_STATUS.SortByDate)
 
-
     var displayStatus:MutableLiveData<DISPLAY_STATUS> = MutableLiveData()
 
     init {
         getDisplayStatus()
+        Timber.tag("vmin").e("vmini")
 
     }
 
@@ -78,6 +78,14 @@ class ClientViewModel @Inject constructor(private val repository: ClientReposito
                 repository.changePayStatus(PAY_STATUS.ToPaid,id)
             else
                 repository.changePayStatus(PAY_STATUS.ToUnPaid,id)
+
+        }
+    }
+
+    fun insertClient(client: Client){
+        viewModelScope.launch {
+            Timber.tag("clienttracker").e(client.toString())
+            repository.insertClient(client)
 
         }
     }

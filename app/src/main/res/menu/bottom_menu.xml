@@ -3,34 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="Home"
+        android:title="@string/menu_home"
         app:showAsAction="always"
         android:orderInCategory="1"
         android:icon="@drawable/ic_analytics"
         android:id="@+id/home_menu"/>
     <item
         app:showAsAction="always"
-        android:title="Clients"
+        android:title="@string/menu_clients"
         android:orderInCategory="2"
         android:icon="@drawable/ic_money"
         android:id="@+id/clients_menu"/>
     <item
-        app:showAsAction="always"
-        android:title="Maintenance"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_maintain"
         android:orderInCategory="3"
         android:icon="@drawable/ic_repair"
         android:id="@+id/maintain_menu"/>
     <item
-        app:showAsAction="always"
-        android:title="Diesel"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_diesel"
         android:orderInCategory="4"
         android:icon="@drawable/ic_petrol"
         android:id="@+id/diesel_menu"/>
     <item
         android:id="@+id/setting_menu"
-        android:title="Setting"
+        android:title="@string/menu_setting"
         android:orderInCategory="5"
         android:icon="@drawable/ic_setting"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+  <string name="menu_home">ပင်မ</string>
+  <string name="menu_clients">လူစာရင်း</string>
+  <string name="menu_maintain">ပြင်/ထိန်း</string>
+  <string name="menu_diesel">ဒီဇယ်</string>
+  <string name="menu_setting">ဆက်တင်</string>
+
   <string name="app_name">Traget</string>
   <string name="home_label_total_paid">ရပြီးငွေ စုစုပေါင်း - </string>
   <string name="home_label_total_unpaid">လက်ကျန်ငွေစုစုပေါင်း - </string>
@@ -9,11 +16,13 @@
   <string name="home_unPaidSum_str"> %1$d ကျပ်</string>
   <string name="home_maintainSum_str"> %1$d ကျပ်</string>
   <string name="home_dieselSum_str"> %1$d ကျပ်</string>
+  <string name="home_barchart_caption">အဝင်အထွက် ငွေစာရင်း</string>
+  <string name="home_piechart_caption">ထွန်စက် မောင်းချိန်စာရင်း</string>
 
 
   <string name="pie_rv_label">%1$d နာရီ %2$d မိနစ်</string>
-  <string name="home_label_total_rv">ဒိုလာမောင်းချိန်ပေါင်း - </string>
-  <string name="home_label_total_hr">လင်ပန်းမောင်းချိန်ပေါင်း - </string>
+  <string name="home_label_total_rv">ဒိုလာမောင်းချိန် -</string>
+  <string name="home_label_total_hr">လင်ပန်းမောင်းချိန် -</string>
   <string name="home_rv_time">%1$d နာရီ %2$d မိနစ်</string>
   <string name="home_hr_time">%1$d နာရီ %2$d မိနစ်</string>
 
@@ -25,12 +34,21 @@
   <string name="client_time_str">%1$d : %2$d</string>
   <string name="client_amt_str">%1$d ကျပ်</string>
 
+  <string name="diesel_item_profit_hint">ပေပါ မောင်းရငွေ</string>
+  <string name="diesel_item_rv_time_hint">ဒိုလာမောင်းချိန်</string>
+  <string name="diesel_item_hr_time_hint">လင်ပန်းမောင်းချိန်</string>
+
   <string name="maintain_item_no_str">%1$d .</string>
   <string name="maintain_price_str">%1$d ကျပ်</string>
+  <string name="maintain_add_caption">ပြင်/ထိန်း အသစ်</string>
+  <string name="maintain_edit_caption">ပြင်ထိန်း ပြင်ဆင်ချက်</string>
+  <string name="maintain_name_hint">Maintenance Name</string>
+  <string name="maintain_cost_hint">Maintenance Cost</string>
 
   <string name="chang_lang_hint">ဘာသာစကားပြောင်းမည်</string>
   <string name="rv_price_str">ဒိုလာတစ်နာရီနှုန်း</string>
   <string name="hr_price_str">လင်ပန်းတစ်နာရီနှုန်း</string>
+  <string name="change_theme_hint">Change App Theme</string>
 
   <string name="diesel_price_hint_str">ဒီဇယ်ဈေး</string>
   <string name="created_date_str">နေ့စွဲ %1$s</string>
@@ -42,7 +60,13 @@
   <string name="cancelBtn_str">ပယ်ဖျက်မည်</string>
   <string name="editBtn_str">ပြင်ဆင်မည်</string>
   <string name="applyBtn_str">အတည်ပြုမည်</string>
+  <string name="client_edit_caption">လူစာရင်း ပြင်ဆင်ချက်</string>
+  <string name="client_add_caption" >လူစာရင်း အသစ်</string>
 
+  <string name="client_pay_alert">Put %1$s to %2$s list?</string>
+  <string name="client_delete_alert">Delete %1$s from the list?</string>
+
+  <string name="maintain_delete_alert">Delete this item from the list?</string>
 
 
 </resources>

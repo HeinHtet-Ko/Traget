@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -18,8 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MaintenanceViewModel @Inject constructor(private val repository: MaintainRepository):ViewModel() {
 
-    private val _maintains = MutableLiveData<List<Maintenance>> ()
-    val maintains:LiveData<List<Maintenance>> = _maintains
+//    private var _maintains = MutableLiveData<List<Maintenance>> ()
+//    val maintains:LiveData<List<Maintenance>> = _maintains
+    val maintainsF:Flow<List<Maintenance>> = repository.getMaintains()
 
     private val mainEventChannel = Channel<MAIN_EVENT>()
     private val dialogChannel = Channel<DIALOG_EVENT>()
@@ -40,21 +42,13 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
     }
 
 
-     fun getMaintainList()
-     {
-        viewModelScope.launch {
-            _maintains.value = repository.getMaintains().first()
-
-        }
-    }
-
 
     private fun updateMaintain(maintain: Maintenance)
     {
         viewModelScope.launch {
             repository.updateMaintain(maintain)
             mainEventChannel.send(MAIN_EVENT.HIDE_DIALOG)
-            getMaintainList()
+
         }
 
         editMaintain.value = null
@@ -77,7 +71,12 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
             dialogChannel.send(DIALOG_EVENT.BIND_EDITTEXT(maintain))
         }
 
+    }
 
+    fun onMaintainItemLongClick(maintain: Maintenance) {
+        viewModelScope.launch {
+            repository.deleteMaintain(maintain)
+        }
     }
 
     fun onSubmitClick(){
@@ -89,7 +88,7 @@ class MaintenanceViewModel @Inject constructor(private val repository: MaintainR
             if(name!=null && price != null){
                 insertMaintain(Maintenance(name = name,price = price))
                 mainEventChannel.send(MAIN_EVENT.HIDE_DIALOG)
-                getMaintainList()
+
             }
             else {
                 if(name.isNullOrEmpty())

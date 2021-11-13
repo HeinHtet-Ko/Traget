@@ -1,9 +1,6 @@
 package com.mtu.ceit.hhk.traget.data.localdb
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.mtu.ceit.hhk.traget.data.model.Maintenance
 import kotlinx.coroutines.flow.Flow
 @Dao
@@ -20,6 +17,9 @@ interface MaintenanceDAO {
 
     @Query("select sum(price) as total from maintenance_table")
     suspend fun getTotalMaintainCost():Int
+
+    @Delete
+    suspend fun deleteMaintain(maintenance: Maintenance)
 
 
 

@@ -1,7 +1,9 @@
 package com.mtu.ceit.hhk.traget.ui.diesel
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +27,14 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
     var itemLongClick : ((Int)->Unit)? = null
 
+    var lastPos:Int = -1
+
 
     var itemList = mutableListOf<DieselWithClientModel>()
+          set(value) {
+              notifyDataSetChanged()
+              field = value
+          }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DieselWithClientViewHolder {
@@ -53,12 +61,23 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
     override fun onBindViewHolder(holder: DieselWithClientViewHolder, position: Int) {
 
         val item = itemList[position]
+
         when(holder) {
             is DieselWithClientViewHolder.DieselParentViewHolder -> {
 
+                val context = holder.binding.root.context
 
                 holder.bind((item as DieselWithClientModel.Parent_Diesel).dieselwithCli.diesel)
                 holder.itemLongClick = itemLongClick
+
+//                if(item.isExpanded){
+//                    holder.binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.isPaid))
+//                }
+//                else{
+//                    holder.binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.isUnpaid))
+//                }
+
+
                 holder.binding.root.setOnClickListener {
 
                     val isExpanded = (item).isExpanded
@@ -78,10 +97,19 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
             }
             is DieselWithClientViewHolder.ClientChildViewHolder -> {
+                val context = holder.binding.root.context
                 holder.bind((item as DieselWithClientModel.Child_Client).client)
+
+                    holder.binding.root.startAnimation(AnimationUtils.loadAnimation(context,android.R.anim.fade_in))
+
+
             }
             is DieselWithClientViewHolder.TotalChildViewHolder -> {
+                val context = holder.binding.root.context
                 holder.bind((item as DieselWithClientModel.Child_Total).totals)
+
+                    holder.binding.root.startAnimation(AnimationUtils.loadAnimation(context,android.R.anim.fade_in))
+
             }
         }
 
@@ -97,6 +125,11 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
             is DieselWithClientModel.Child_Total -> R.layout.total_per_diesel_item
         }
     }
+
+
+
+
+
 
 
     private fun calculateTotal(clients: List<Client>):Triple<String,String,String>
@@ -159,6 +192,9 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
 sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHolder(binding.root){
 
+
+
+
      class DieselParentViewHolder(val binding:DieselItemBinding):DieselWithClientViewHolder(binding){
 
         var itemLongClick : ((Int)->Unit)? = null
@@ -213,14 +249,15 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
                      itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
 
                  if (client.isPaid)
-                     root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.paid_client)
+                     itemClientAmtTv.setTextColor(ColorTemplate.MATERIAL_COLORS[0])
                  else
-                     root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.unpaid_client)
-
+                     itemClientAmtTv.setTextColor(ColorTemplate.MATERIAL_COLORS[1])
 
              }
 
          }
+
+
 
     }
 

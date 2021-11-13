@@ -3,5 +3,6 @@
     <declare-styleable name="ds">
         <attr name="pieHoleColor" format="color"/>
         <attr name="barChartLabelColor" format="color"/>
+        <attr name="dayNightColor" format="color" />
     </declare-styleable>
 </resources>

@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/fr_home_barchart"
             android:layout_width="match_parent"
@@ -21,7 +23,20 @@
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+           app:layout_constraintTop_toBottomOf="@id/fr_home_barchart_caption"
+            />
+
+        <TextView
+            android:id="@+id/fr_home_barchart_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_barchart_caption"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/captiontextstyle"
+           />
 
         <TextView
             android:id="@+id/paidsum_label"
@@ -87,6 +102,8 @@
             style="@style/labeltextstyle"/>
 
 
+
+
         <TextView
             android:id="@+id/diesel_label"
             android:layout_width="wrap_content"
@@ -107,14 +124,39 @@
             app:layout_constraintTop_toTopOf="@+id/diesel_label"
             style="@style/labeltextstyle"/>
 
+        <View
+            android:id="@+id/fr_home_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="#0277BD"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_dieselsum_tv" />
+
+
+        <TextView
+            android:id="@+id/fr_home_piechart_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_piechart_caption"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fr_home_divider"
+            style="@style/captiontextstyle"
+           />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/fr_home_piechart"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fr_home_dieselsum_tv" />
+            app:layout_constraintTop_toBottomOf="@id/fr_home_piechart_caption" />
+
 
         <TextView
             style="@style/labeltextstyle"
@@ -144,6 +186,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textguidline"
             app:layout_constraintTop_toBottomOf="@id/fr_home_rvsum_tv" />
+
         <TextView
             style="@style/labeltextstyle"
             android:layout_width="wrap_content"

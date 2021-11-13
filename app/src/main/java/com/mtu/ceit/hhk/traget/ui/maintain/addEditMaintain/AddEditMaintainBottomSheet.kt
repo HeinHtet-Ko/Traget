@@ -36,35 +36,40 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         binding = FragmentAddEditMaintainBinding.bind(view)
+        binding = FragmentAddEditMaintainBinding.bind(view)
 
+        viewInit()
+
+        collectEvents()
+    }
+
+    private fun viewInit(){
         this.isCancelable = false
-
-         binding.apply {
+        binding.apply {
             frAddEditMtNameEdT.addTextChangedListener {
                 vm.maintainName.value = it.toString()
             }
             frAddEditMtPriceEdT.addTextChangedListener {
                 if(it.toString().isNotEmpty())
-                vm.maintainPrice.value = it.toString().toInt()
+                    vm.maintainPrice.value = it.toString().toInt()
             }
+
+            frAddEditMtCancelBtn.setOnClickListener {
+                vm.onCancelClick()
+            }
+            frAddEditMtApplyBtn.setOnClickListener {
+                if(vm.editMaintain.value == null)
+                    vm.onSubmitClick()
+                else
+                    vm.onEditClick()
+
+                if(vm.editMaintain.value == null ){
+                    binding.frAddEditMtDateTv.text = getString(R.string.created_date_str, DateFormat.getDateInstance().format(System.currentTimeMillis()).toString())
+
+                }
+            }
+
         }
-
-        binding.frAddEditMtCancelBtn.setOnClickListener {
-            vm.onCancelClick()
-        }
-
-        if(vm.editMaintain.value == null )
-            binding.frAddEditMtDateTv.text = getString(R.string.created_date_str, DateFormat.getDateInstance().format(System.currentTimeMillis()).toString())
-
-        binding.frAddEditMtApplyBtn.setOnClickListener {
-            if(vm.editMaintain.value == null)
-                vm.onSubmitClick()
-            else
-                vm.onEditClick()
-
-        }
-        collectEvents()
     }
 
     private fun collectEvents(){
@@ -91,8 +96,7 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
             frAddEditMtPriceEdT.setText(maintain.price.toString())
             frAddEditMtNameEdT.setText(maintain.name)
             frAddEditMtApplyBtn.text = getString(R.string.editBtn_str)
-            frAddEditMtLabel.text = "Edit A Maintenance "
-
+            frAddEditMtLabel.text = getString(R.string.maintain_edit_caption)
             frAddEditMtDateTv.text = getString(R.string.created_date_str, DateFormat.getDateInstance().format(maintain.date).toString())
         }
 

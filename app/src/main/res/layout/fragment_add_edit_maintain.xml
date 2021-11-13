@@ -6,18 +6,17 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
+        android:id="@+id/fr_addEdit_mt_label"
         style="@style/labeltextstyle"
-        android:layout_marginTop="15dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add A Maintenance "
-        android:id="@+id/fr_addEdit_mt_label"/>
+        android:layout_marginTop="25dp"
+        android:text="@string/maintain_add_caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fr_addEdit_mt_nameLy"
@@ -25,11 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fr_addEdit_mt_label"
         app:startIconDrawable="@drawable/ic_avatar"
         app:startIconTint="@color/iconTint">
 
@@ -37,7 +36,7 @@
             android:id="@+id/fr_addEdit_mt_name_edT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="@string/maintain_name_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +58,7 @@
             android:id="@+id/fr_addEdit_mt_price_edT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=" Price "
+            android:hint="@string/maintain_cost_hint"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>

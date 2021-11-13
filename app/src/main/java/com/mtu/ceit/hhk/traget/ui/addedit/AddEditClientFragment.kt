@@ -132,6 +132,7 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
             frAddEditMacAutocomplete.setText(getString(checkID),false)
             frAddEditConfirmBtn.text = getString(R.string.editBtn_str)
+            frAddEditCaptionTv.text = getString(R.string.client_edit_caption)
 
 
         }

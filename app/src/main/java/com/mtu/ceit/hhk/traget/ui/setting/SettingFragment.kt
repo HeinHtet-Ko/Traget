@@ -66,7 +66,7 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
                 setThemeImage(i==0)
             }
 
-            val array = arrayOf("Dark Theme","Day Theme")
+            val array = arrayOf("  Dark Theme  ","  Day Theme  ")
             DialogBuilder.buildItemDialog(requireContext(),array,listenerTheme,"Choose App Theme",R.drawable.darkday)
 
 
@@ -115,7 +115,10 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
     private fun showRvBs(){
 
         val listener = { updatedFee:Int ->
-            binding.frSettingRvfeeTv.text = updatedFee.toString()
+
+
+
+           // binding.frSettingRvfeeTv.text = getString(R.string.client_amt_str,updatedFee)
             vm.setRvPrice(updatedFee)
         }
 
@@ -125,7 +128,7 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
 
     private fun showHrBs(){
         val listener = {updatedFee:Int ->
-            binding.frSettingHrfeeTv.text = updatedFee.toString()
+           // binding.frSettingHrfeeTv.text = getString(R.string.client_amt_str,updatedFee)
             vm.setHrPrice(updatedFee)
         }
         showBs(listener)
@@ -147,10 +150,10 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
     private fun observePrice(){
 
         vm.hrPrice.observe(viewLifecycleOwner){
-            binding.frSettingHrfeeTv.text = it.toString()
+            binding.frSettingHrfeeTv.text = getString(R.string.client_amt_str,it)
         }
         vm.rvPrice.observe(viewLifecycleOwner){
-            binding.frSettingRvfeeTv.text = it.toString()
+            binding.frSettingRvfeeTv.text = getString(R.string.client_amt_str,it)
         }
 
     }

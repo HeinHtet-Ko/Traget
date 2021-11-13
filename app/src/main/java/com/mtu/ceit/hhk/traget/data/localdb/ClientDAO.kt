@@ -17,7 +17,8 @@ interface ClientDAO {
     @Delete
     suspend fun deleteClients(client: Client)
 
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertClient(client: Client)
 
     @Update

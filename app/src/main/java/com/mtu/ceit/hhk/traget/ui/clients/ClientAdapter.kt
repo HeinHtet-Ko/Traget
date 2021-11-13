@@ -60,15 +60,11 @@ class ClientAdapter: ListAdapter<Client, ClientAdapter.ClientViewHolder>(ClientD
                 if(!client.note.isNullOrEmpty())
                     itemClientNameTv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_note,0)
 
-                if (client.isPaid)
-                    root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.paid_client)
-                else
-                    root.background = ContextCompat.getDrawable(binding.root.context,R.drawable.unpaid_client)
 
-//                if (client.isPaid)
-//                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[0])
-//                else
-//                    root.setBackgroundColor(ColorTemplate.MATERIAL_COLORS[1])
+                if (client.isPaid)
+                    itemClientAmtTv.setTextColor(ColorTemplate.MATERIAL_COLORS[0])
+                else
+                    itemClientAmtTv.setTextColor(ColorTemplate.MATERIAL_COLORS[1])
 
 
             }

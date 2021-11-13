@@ -9,10 +9,7 @@
     tools:ignore="RtlSymmetry">
 
 
-
     <TextView
-
-
         style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -49,14 +46,21 @@
         android:layout_marginStart="5dp"
         android:id="@+id/item_client_time_tv"
        />
+
     <TextView
 
-        android:layout_marginEnd="8dp"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/item_client_amt_tv"
         style="@style/clientitemtextstyle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/item_client_amt_tv"
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="4dp" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fabColor"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

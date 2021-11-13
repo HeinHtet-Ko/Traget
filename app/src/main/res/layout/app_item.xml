@@ -2,10 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#7AA4B8"
     android:paddingStart="5dp"
     android:layout_margin="3dp"
     >
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/fabColor"
+        android:layout_alignParentBottom="true"/>
 
     <TextView
 

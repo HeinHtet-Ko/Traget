@@ -29,6 +29,10 @@ import javax.inject.Inject
 
      }
 
+     suspend fun insertClient(client: Client){
+         dao.insertClient(client)
+     }
+
      fun getSearch(query:String,sort: SORT_STATUS,displayStatus: DISPLAY_STATUS):Flow<List<Client>> = dao.getSearch(query,sort,displayStatus)
 
 

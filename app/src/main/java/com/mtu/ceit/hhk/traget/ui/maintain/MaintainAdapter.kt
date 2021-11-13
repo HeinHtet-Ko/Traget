@@ -1,4 +1,4 @@
-package com.mtu.ceit.hhk.traget.ui.adapter
+package com.mtu.ceit.hhk.traget.ui.maintain
 
 
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import com.mtu.ceit.hhk.traget.databinding.AppItemBinding
 class MaintainAdapter: ListAdapter<Maintenance, MaintainAdapter.MaintainViewHolder>(MaintainDifferentiator()) {
 
     lateinit var itemClickListen:(Maintenance) -> (Unit)
+    lateinit var itemLongClickListen:(Maintenance) -> (Unit)
 
     inner class MaintainViewHolder(private val binding: AppItemBinding):RecyclerView.ViewHolder(binding.root){
 
@@ -20,6 +21,11 @@ class MaintainAdapter: ListAdapter<Maintenance, MaintainAdapter.MaintainViewHold
         init {
             binding.root.setOnClickListener {
                 itemClickListen.invoke(getItem(adapterPosition))
+            }
+            binding.root.setOnLongClickListener {
+
+                itemLongClickListen.invoke(getItem(adapterPosition))
+                return@setOnLongClickListener true
             }
         }
 

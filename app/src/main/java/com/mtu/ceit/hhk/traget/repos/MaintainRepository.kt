@@ -19,4 +19,8 @@ class MaintainRepository @Inject constructor(private val dao:MaintenanceDAO) {
         dao.updateMaintain(maintain)
     }
 
+    suspend fun deleteMaintain(maintain: Maintenance) {
+        dao.deleteMaintain(maintain)
+    }
+
 }

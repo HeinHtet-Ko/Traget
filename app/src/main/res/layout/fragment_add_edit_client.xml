@@ -16,8 +16,8 @@
 
         <TextView
             android:id="@+id/fr_addEdit_caption_tv"
-            style="@style/textcaption"
-            android:layout_marginTop="15dp"
+            style="@style/captiontextstyle"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/client_add_caption"
