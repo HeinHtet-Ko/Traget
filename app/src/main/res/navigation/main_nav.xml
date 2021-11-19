@@ -41,7 +41,7 @@
         android:id="@+id/setting_menu"
         android:name="com.mtu.ceit.hhk.traget.ui.setting.SettingFragment"
         android:label="Setting"
-        tools:layout="@layout/fragment_setting"
+        tools:layout="@layout/fragment_settings"
         />
     <fragment
         android:id="@+id/addEditClientFragment"

@@ -48,6 +48,9 @@
     <string name="rv_price_str">RV Fee Per Hr</string>
     <string name="hr_price_str">HR Fee Per Hr</string>
     <string name="change_theme_hint">Change App Theme</string>
+    <string name="upload_hint">Upload Data to Cloud</string>
+    <string name="download_hint">Download Data from Cloud</string>
+
 
     <string name="diesel_price_hint_str">Price Per Barrel</string>
 

@@ -10,7 +10,8 @@ import java.text.DateFormat
 @Parcelize
 data class Diesel (
         @PrimaryKey (autoGenerate = true)
-        val bId:Int = 0,val price:Int,
+        val bId:Int = 0,
+        val price:Int,
         val isActive:Boolean = false,
         val date:Long = System.currentTimeMillis()) :Parcelable{
 

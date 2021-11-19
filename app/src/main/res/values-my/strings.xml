@@ -49,6 +49,9 @@
   <string name="rv_price_str">ဒိုလာတစ်နာရီနှုန်း</string>
   <string name="hr_price_str">လင်ပန်းတစ်နာရီနှုန်း</string>
   <string name="change_theme_hint">Change App Theme</string>
+  <string name="upload_hint">Upload Data to Cloud</string>
+  <string name="download_hint">Download Data from Cloud</string>
+
 
   <string name="diesel_price_hint_str">ဒီဇယ်ဈေး</string>
   <string name="created_date_str">နေ့စွဲ %1$s</string>

@@ -1,36 +1,27 @@
 package com.mtu.ceit.hhk.traget.ui.setting
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.res.Configuration
-import android.os.Build
+import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.storage.FirebaseStorage
 import com.mtu.ceit.hhk.traget.R
 
 import com.mtu.ceit.hhk.traget.databinding.FragmentSettingsBinding
 import com.mtu.ceit.hhk.traget.ui.MainActivity
 import com.mtu.ceit.hhk.traget.util.Constants
 import com.mtu.ceit.hhk.traget.util.DialogBuilder
-import com.mtu.ceit.hhk.traget.util.Utils
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import java.util.*
-import javax.inject.Inject
+import java.io.File
 
 @AndroidEntryPoint
 class SettingFragment:Fragment(R.layout.fragment_settings) {
@@ -40,17 +31,32 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
     private lateinit var vm :SettingViewModel
 
 
+    private lateinit var localClientFile:File
+    private lateinit var localMaintainFile:File
+    private lateinit var localDieselFile:File
+
+    lateinit var ad:AlertDialog
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
 
         vm = (requireActivity() as MainActivity).settingVM
 
-
         observeTheme()
         observeLang()
         observePrice()
         viewInit()
+
+        collectLoadingEvent()
+
+        localClientFile = generateFile(requireContext(),Constants.clientFileName)
+        localMaintainFile = generateFile(requireContext(),Constants.maintainFileName)
+        localDieselFile = generateFile(requireContext(),Constants.dieselFileName)
+
 
 
 
@@ -100,7 +106,37 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
             showHrBs()
         }
 
+        binding.frSettingUploadLy.setOnClickListener {
+            vm.writeEntireDatabase(localClientFile,localMaintainFile,localDieselFile)
+            ad = DialogBuilder.buildLoadingDialog(requireContext(),R.layout.uploading_view)
+        }
 
+        binding.frSettingDownloadLy.setOnClickListener {
+            vm.readEntireDatabase(localClientFile,localMaintainFile,localDieselFile)
+            ad = DialogBuilder.buildLoadingDialog(requireContext(),R.layout.downloading_view)
+        }
+
+
+    }
+
+    private fun collectLoadingEvent(){
+       viewLifecycleOwner.lifecycleScope.launch {
+           viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+               vm.loadingEventFlow.collect {
+                   when(it) {
+                       LoadingEvent.Downloading,LoadingEvent.Uploading -> {
+                           ad.show()
+                       }
+                       LoadingEvent.Downloaded,LoadingEvent.Uploaded -> {
+                           ad.dismiss()
+                       }
+
+                   }
+               }
+
+           }
+       }
     }
 
     private fun showBs(listener:(Int)->(Unit)){
@@ -115,10 +151,6 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
     private fun showRvBs(){
 
         val listener = { updatedFee:Int ->
-
-
-
-           // binding.frSettingRvfeeTv.text = getString(R.string.client_amt_str,updatedFee)
             vm.setRvPrice(updatedFee)
         }
 
@@ -128,7 +160,7 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
 
     private fun showHrBs(){
         val listener = {updatedFee:Int ->
-           // binding.frSettingHrfeeTv.text = getString(R.string.client_amt_str,updatedFee)
+
             vm.setHrPrice(updatedFee)
         }
         showBs(listener)
@@ -160,16 +192,16 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
 
     private fun setThemeImage(isNight:Boolean){
         if (isNight)
-            binding.frSettingThemeImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.night_mode))
+            binding.frSettingThemeImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.night))
         else
-            binding.frSettingThemeImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.daymode))
+            binding.frSettingThemeImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.light))
     }
 
     private fun setLangImage(isEnglish:Boolean){
         if (isEnglish)
             binding.frSettingLangImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.english))
         else
-            binding.frSettingLangImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.burmese))
+            binding.frSettingLangImg.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.myanmar))
 
 
     }
@@ -186,6 +218,21 @@ class SettingFragment:Fragment(R.layout.fragment_settings) {
         }
 
     }
+
+
+
+    private fun generateFile(context: Context, fileName: String): File {
+
+        val csvFile = File(context.getExternalFilesDir(null), fileName)
+        csvFile.createNewFile()//create new file only if a file with that name doesn't yet exist
+
+        return csvFile
+    }
+
+
+
+
+
 
 
 

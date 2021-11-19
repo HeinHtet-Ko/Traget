@@ -11,7 +11,7 @@ interface DieselDAO {
     @Query("select * from diesel_table")
     fun getAllDiesel(): Flow<List<Diesel>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDiesel(diesel: Diesel)
 
     @Transaction

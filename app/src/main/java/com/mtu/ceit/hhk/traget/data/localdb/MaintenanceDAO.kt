@@ -12,7 +12,8 @@ interface MaintenanceDAO {
      @Update
      suspend fun updateMaintain(maintenance: Maintenance)
 
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMaintain(app:Maintenance)
 
     @Query("select sum(price) as total from maintenance_table")
