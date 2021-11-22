@@ -34,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -89,8 +90,10 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
         }
 
         clientAdapter.click = {
+
             val action = ClientFragmentDirections.actionClientToAddEditClientFragment(it)
             findNavController().navigate(action)
+
         }
 
         ItemTouchHelper(object :ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT ){
@@ -129,9 +132,9 @@ class ClientFragment :Fragment(R.layout.fragment_clients) {
         }).attachToRecyclerView(binding.frClientsRecycler)
 
         binding.frClientsFab.setOnClickListener {
-
+            val extras = FragmentNavigatorExtras(binding.frClientsFab to "shared_element")
             val action = ClientFragmentDirections.actionClientToAddEditClientFragment(null)
-            findNavController().navigate(action)
+            findNavController().navigate(action,extras)
 
         }
     }

@@ -14,9 +14,12 @@ interface DieselDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDiesel(diesel: Diesel)
 
+    @Delete
+    suspend fun deleteDiesel(diesel:Diesel)
+
     @Transaction
     @Query("select * from diesel_table")
-    fun getDieselWithClients():List<DieselWithClients>
+    fun getDieselWithClients():Flow<List<DieselWithClients>>
 
     @Query("select sum(price) as price from diesel_table")
     suspend fun getDieselSum():Int
@@ -29,6 +32,8 @@ interface DieselDAO {
 
     @Query("select bId as id from diesel_table where isActive=1")
     suspend fun getActive():Int
+
+
 
 }
 

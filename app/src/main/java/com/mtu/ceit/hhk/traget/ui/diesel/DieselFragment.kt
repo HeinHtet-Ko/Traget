@@ -23,7 +23,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class DieselFragment:Fragment(R.layout.fragment_diesel) {
 
-    private val vm by activityViewModels<DieselViewModel>()
+    private val vm by viewModels<DieselViewModel>(
+        ownerProducer = {this}
+    )
     lateinit var binding:FragmentDieselBinding
     var dcAdapter:DieselWithClientAdapter = DieselWithClientAdapter()
     private val addEditbs by lazy {
@@ -41,18 +43,16 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
 
         binding.barrelRecycler.itemAnimator = DefaultItemAnimator()
 
-        vm.getBarrelsWithClients()
-
         binding.frDieselFab.setOnClickListener {
 
             vm.onFabClick()
         }
 
-        dcAdapter.itemLongClick={ id ->
-            vm.setActiveId(id)
+        dcAdapter.itemLongClick={ diesel ->
+            vm.onLongClick(diesel)
        }
 
-        vm.barrelWithClients.observe(viewLifecycleOwner){  dieselsWithClients ->
+        vm.bc.observe(viewLifecycleOwner){  dieselsWithClients ->
 
             val ls = dieselsWithClients.map { DieselWithClientModel.Parent_Diesel(it) }
             dcAdapter.itemList = ls.toMutableList()
@@ -75,7 +75,7 @@ class DieselFragment:Fragment(R.layout.fragment_diesel) {
                     when(it) {
                         is MAIN_EVENT.SHOW_DIALOG ->{
                             if(!addEditbs.isAdded)
-                                addEditbs.show(parentFragmentManager,AddEditDieselBottomSheet.TAG)
+                                addEditbs.show(childFragmentManager,AddEditDieselBottomSheet.TAG)
                         }
                         is MAIN_EVENT.HIDE_DIALOG -> addEditbs.dismiss()
                     }

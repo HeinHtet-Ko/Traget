@@ -25,7 +25,7 @@ import java.text.DateFormat
 class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>() {
 
 
-    var itemLongClick : ((Int)->Unit)? = null
+    var itemLongClick : ((Diesel)->Unit)? = null
 
     var lastPos:Int = -1
 
@@ -69,13 +69,6 @@ class DieselWithClientAdapter: RecyclerView.Adapter<DieselWithClientViewHolder>(
 
                 holder.bind((item as DieselWithClientModel.Parent_Diesel).dieselwithCli.diesel)
                 holder.itemLongClick = itemLongClick
-
-//                if(item.isExpanded){
-//                    holder.binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.isPaid))
-//                }
-//                else{
-//                    holder.binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.isUnpaid))
-//                }
 
 
                 holder.binding.root.setOnClickListener {
@@ -197,7 +190,7 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
 
      class DieselParentViewHolder(val binding:DieselItemBinding):DieselWithClientViewHolder(binding){
 
-        var itemLongClick : ((Int)->Unit)? = null
+        var itemLongClick : ((Diesel)->Unit)? = null
 
 
 
@@ -217,7 +210,7 @@ sealed class DieselWithClientViewHolder(binding:ViewBinding):RecyclerView.ViewHo
 
                 root.setOnLongClickListener {
 
-                    itemLongClick?.invoke(diesel.bId)
+                    itemLongClick?.invoke(diesel)
                     return@setOnLongClickListener true
                 }
             }

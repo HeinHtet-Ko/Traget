@@ -17,13 +17,15 @@ import com.mtu.ceit.hhk.traget.util.MAIN_EVENT
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MaintenanceFragment:Fragment(R.layout.fragment_maintenance) {
 
 
 
-    val vm: MaintenanceViewModel by activityViewModels()
+    //val vm: MaintenanceViewModel by activityViewModels()
+    private val vm:MaintenanceViewModel by viewModels (ownerProducer = {this})
     private val addEditbottomsheet by lazy {
        AddEditMaintainBottomSheet()
     }
@@ -35,6 +37,8 @@ class MaintenanceFragment:Fragment(R.layout.fragment_maintenance) {
         val binding: FragmentMaintenanceBinding = FragmentMaintenanceBinding.bind(view)
 
         viewInit(binding)
+
+        Timber.tag("vmtracker").e(vm.toString())
 
         collectEvents()
 
@@ -59,7 +63,7 @@ class MaintenanceFragment:Fragment(R.layout.fragment_maintenance) {
                         when(it) {
                             MAIN_EVENT.SHOW_DIALOG ->{
                                 if(!addEditbottomsheet.isAdded)
-                                    addEditbottomsheet.show(parentFragmentManager,AddEditMaintainBottomSheet.TAG)
+                                    addEditbottomsheet.show(childFragmentManager,AddEditMaintainBottomSheet.TAG)
                             }
                             MAIN_EVENT.HIDE_DIALOG -> addEditbottomsheet.dismiss()
 

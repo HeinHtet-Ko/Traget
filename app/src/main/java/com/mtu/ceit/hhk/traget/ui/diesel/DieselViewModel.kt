@@ -19,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DieselViewModel @Inject constructor(private val repository: DieselRepository):ViewModel  (){
 
-    var barrelWithClients:MutableLiveData<List<DieselWithClients>> = MutableLiveData()
+
+    val bc = repository.getBarrelsWithClients().asLiveData()
 
     var newPrice:MutableLiveData<Int?> = MutableLiveData(null)
 
@@ -34,7 +35,7 @@ class DieselViewModel @Inject constructor(private val repository: DieselReposito
 
             repository.insertBarrel(diesel)
             mainEvent.send(MAIN_EVENT.HIDE_DIALOG)
-            getBarrelsWithClients()
+           // getBarrelsWithClients()
 
         }
     }
@@ -43,18 +44,19 @@ class DieselViewModel @Inject constructor(private val repository: DieselReposito
         viewModelScope.launch {
             repository.setAllInactive()
             repository.setActiveId(id)
-            getBarrelsWithClients()
+
 
         }
 
     }
 
+    fun onLongClick(diesel:Diesel){
+        viewModelScope.launch {
+            repository.deleteDiesel(diesel)
+        }
+    }
 
-    fun getBarrelsWithClients() {
-         viewModelScope.launch(IO) {
-            barrelWithClients.postValue(repository.getBarrelsWithClients())
-         }
-     }
+
 
     fun onFabClick(){
         viewModelScope.launch {

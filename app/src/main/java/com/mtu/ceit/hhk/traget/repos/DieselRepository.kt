@@ -19,6 +19,10 @@ class DieselRepository @Inject constructor(private val dao:DieselDAO) {
 
     suspend fun setAllInactive() = dao.setAllInActive()
 
+    suspend fun deleteDiesel(diesel: Diesel) {
+        dao.deleteDiesel(diesel)
+    }
+
 
     fun getAllBarrels() = dao.getAllDiesel()
 

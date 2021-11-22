@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -23,7 +24,9 @@ import timber.log.Timber
 
 class AddEditDieselBottomSheet:BottomSheetDialogFragment() {
 
-    private val vm by activityViewModels<DieselViewModel>()
+    private val vm by viewModels<DieselViewModel>(
+        ownerProducer = {requireParentFragment()}
+    )
     lateinit var binding:FragmentAddEditDieselBinding
 
     companion object {

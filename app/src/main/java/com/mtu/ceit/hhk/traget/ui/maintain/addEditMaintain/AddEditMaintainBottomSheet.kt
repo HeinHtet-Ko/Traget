@@ -27,7 +27,8 @@ import java.text.DateFormat
 class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
 
     lateinit var binding:FragmentAddEditMaintainBinding
-    private val vm by activityViewModels<MaintenanceViewModel>()
+
+    private val vm by viewModels<MaintenanceViewModel>(ownerProducer = {requireParentFragment()})
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_add_edit_maintain,container,false)
 
@@ -37,6 +38,8 @@ class AddEditMaintainBottomSheet: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentAddEditMaintainBinding.bind(view)
+
+        Timber.tag("vmtracker").e(vm.toString())
 
         viewInit()
 

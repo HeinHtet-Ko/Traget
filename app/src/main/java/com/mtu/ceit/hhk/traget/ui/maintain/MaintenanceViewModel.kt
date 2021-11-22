@@ -19,8 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MaintenanceViewModel @Inject constructor(private val repository: MaintainRepository):ViewModel() {
 
-//    private var _maintains = MutableLiveData<List<Maintenance>> ()
-//    val maintains:LiveData<List<Maintenance>> = _maintains
     val maintainsF:Flow<List<Maintenance>> = repository.getMaintains()
 
     private val mainEventChannel = Channel<MAIN_EVENT>()

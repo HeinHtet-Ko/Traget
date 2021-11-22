@@ -2,6 +2,7 @@ package com.mtu.ceit.hhk.traget.ui.addedit
 
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
 import com.mtu.ceit.hhk.traget.R
 import com.mtu.ceit.hhk.traget.util.Utils
 import com.mtu.ceit.hhk.traget.data.model.Client
@@ -36,6 +38,14 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
     private var macItemPos:Int = -1
     private var amount:Int = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            scrimColor = Color.TRANSPARENT
+
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +54,8 @@ class AddEditClientFragment:Fragment(R.layout.fragment_add_edit_client) {
 
 
         viewComponentsInit()
+
+
 
 
 
