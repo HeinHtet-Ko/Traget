@@ -8,12 +8,12 @@
 
     <fragment
         android:id="@+id/home_menu"
-        android:name="com.mtu.ceit.hhk.traget.features.home.HomeFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/clients_menu"
-        android:name="com.mtu.ceit.hhk.traget.features.clients.ClientFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.clients.ClientFragment"
         android:label="Clients"
         tools:layout="@layout/fragment_clients" >
 
@@ -24,25 +24,25 @@
     </fragment>
     <fragment
         android:id="@+id/maintain_menu"
-        android:name="com.mtu.ceit.hhk.traget.features.maintain.MaintenanceFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.maintain.MaintenanceFragment"
         android:label="Maintainance"
         tools:layout="@layout/fragment_maintenance" />
     <fragment
         android:id="@+id/diesel_menu"
-        android:name="com.mtu.ceit.hhk.traget.features.diesel.DieselFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.diesel.DieselFragment"
         android:label="Diesel"
         tools:layout="@layout/fragment_diesel" >
 
     </fragment>
     <fragment
         android:id="@+id/setting_menu"
-        android:name="com.mtu.ceit.hhk.traget.features.setting.SettingFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.setting.SettingFragment"
         android:label="Setting"
         tools:layout="@layout/fragment_settings"
         />
     <fragment
         android:id="@+id/addEditClientFragment"
-        android:name="com.mtu.ceit.hhk.traget.features.addedit.AddEditClientFragment"
+        android:name="com.mtu.ceit.hhk.traget.presentation.features.addedit.AddEditClientFragment"
         android:label="fragment_add_edit_client"
         tools:layout="@layout/fragment_add_edit_client" >
         <argument
