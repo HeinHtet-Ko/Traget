@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ClientDAO {
 
+    /*
+    Clients
+     */
 
     @Query("select * from client_table")
     fun getAllClients(): Flow<List<Client>>
@@ -24,6 +27,17 @@ interface ClientDAO {
     @Update
     suspend fun updateClient(client:Client)
 
+    @Query("update client_table set isPaid = 1 where id = :cId ")
+    suspend fun updateToPaid(cId:Int)
+
+    @Query("update client_table set isPaid = 0 where id = :cId ")
+    suspend fun updateToUnPaid(cId:Int)
+
+
+    /*
+    Client Main
+     */
+
     @Query("select sum(amount) as total from client_table where isPaid = 0 ")
     suspend fun getUnPaidSum(): Int
 
@@ -33,17 +47,15 @@ interface ClientDAO {
     @Query("select sum(timeTaken) as total from client_table where macType = 'Rotavator' ")
     suspend fun getTotalRo():Int
 
-    @Query("select sum(timeTaken) as total from client_table where macType = 'Rotavator' and barrelId = :bId " )
-    suspend fun getRvSumPerBarrel(bId:Int):Int
+//    @Query("select sum(timeTaken) as total from client_table where macType = 'Rotavator' and barrelId = :bId " )
+//    suspend fun getRvSumPerBarrel(bId:Int):Int
 
     @Query("select sum(timeTaken) as total from client_table where macType = 'Harrow' ")
     suspend fun getTotalHr():Int
 
-    @Query("update client_table set isPaid = 1 where id = :cId ")
-    suspend fun updateToPaid(cId:Int)
 
-    @Query("update client_table set isPaid = 0 where id = :cId ")
-    suspend fun updateToUnPaid(cId:Int)
+
+
 
     @Query("select * from client_table where name like '%' || :query || '%'  order by amount desc")
      fun getSortByAmtDesc(query: String):Flow<List<Client>>
@@ -93,11 +105,6 @@ interface ClientDAO {
 
              }
          }
-
-
-
-
-
 
 }
 

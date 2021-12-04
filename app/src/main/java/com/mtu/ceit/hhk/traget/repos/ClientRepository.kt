@@ -9,7 +9,6 @@ import javax.inject.Inject
  class ClientRepository @Inject constructor(private val dao: ClientDAO,private val displayStatusPrefs: DisplayStatusPrefs) {
 
 
-
      fun displayStatus() = displayStatusPrefs.displayStatus()
 
      suspend fun setDisplayStatus(status: DISPLAY_STATUS) {

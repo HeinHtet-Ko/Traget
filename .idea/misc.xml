@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/activity_main.xml" value="0.1743659420289855" />
         <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_add_edit_client.xml" value="0.1453804347826087" />
         <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_clients.xml" value="0.1453804347826087" />
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_home.xml" value="0.12631578947368421" />
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_maintenance.xml" value="0.12631578947368421" />
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_setting_updatefee.xml" value="0.1743659420289855" />
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/fragment_settings.xml" value="0.1743659420289855" />
+        <entry key="..\:/Android Projects/Traget/app/src/main/res/layout/uploading_view.xml" value="0.12401315789473684" />
       </map>
     </option>
   </component>

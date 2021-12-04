@@ -15,9 +15,7 @@ class DieselRepository @Inject constructor(private val dao:DieselDAO) {
 
     suspend fun getActiveId() = flowOf(dao.getActive())
 
-    suspend fun setActiveId(id:Int) = dao.setActive(id)
 
-    suspend fun setAllInactive() = dao.setAllInActive()
 
     suspend fun deleteDiesel(diesel: Diesel) {
         dao.deleteDiesel(diesel)

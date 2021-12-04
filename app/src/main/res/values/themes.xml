@@ -75,7 +75,7 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
     <style name="addFABstyle" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="android:layout_marginBottom">75dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_marginEnd">15dp</item>
         <item name="fabCustomSize">50dp</item>
         <item name="android:src">@drawable/ic_add</item>
@@ -127,7 +127,7 @@
         <item name="android:layout_marginStart">10dp</item>
         <item name="cardElevation">8dp</item>
         <item name="android:layout_marginEnd">4dp</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginTop">7dp</item>
 
 
     </style>

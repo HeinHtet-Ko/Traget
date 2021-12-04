@@ -50,6 +50,10 @@ private val clientDAO: ClientDAO,private val maintainDAO:MaintenanceDAO,private 
         maintainDAO.insertMaintain(maintain)
     }
 
+    suspend fun setActiveId(id:Int) = dieselDAO.setActive(id)
+
+    suspend fun setAllInactive() = dieselDAO.setAllInActive()
+
 
 
 

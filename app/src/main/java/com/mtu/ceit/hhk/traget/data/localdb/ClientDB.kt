@@ -28,10 +28,10 @@ abstract class ClientDB :RoomDatabase(){
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
 
-            val DB = database.get()
-            val dao = DB.getDAO()
-            val barDao = DB.getBarrelDAO()
-            val appDao = DB.getMaintainDAO()
+         //   val DB = database.get()
+//            val dao = DB.getDAO()
+//            val barDao = DB.getBarrelDAO()
+//            val appDao = DB.getMaintainDAO()
 //            scope.launch {
 //
 //                barDao.insertDiesel(Diesel(1,price = 350000))
